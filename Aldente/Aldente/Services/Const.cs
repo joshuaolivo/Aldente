@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Aldente.Services
 {
-    interface ITenantEntity
+    public static class Constan
     {
-        public string TenantId { get; set; }
+        public const string ClaimTenantId = "TenantId";
     }
 }

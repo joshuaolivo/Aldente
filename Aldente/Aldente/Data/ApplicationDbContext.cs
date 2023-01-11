@@ -44,8 +44,7 @@ namespace Aldente.Data
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            foreach (var item in ChangeTracker.Entries().Where(e => e.State == EntityState.Added
-            && e.Entity is ITenantEntity))
+            foreach (var item in ChangeTracker.Entries().Where(e => e.State == EntityState.Added && e.Entity is ITenantEntity))
             {
                 if (string.IsNullOrEmpty(tenantId))
                 {

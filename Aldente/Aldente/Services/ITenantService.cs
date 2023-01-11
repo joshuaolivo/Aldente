@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Aldente.Services
 {
-    interface ITenantService
+    public interface ITenantService
     {
         string getTenant();
     }

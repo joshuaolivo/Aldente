@@ -1,4 +1,5 @@
 ﻿using Aldente.Models;
+using Aldente.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -35,7 +36,7 @@ namespace Aldente.Controllers
 
             var claimsPersonalizados = new List<Claim>()
             {
-                new Claim(Constantes.ClaimTenantId, user.Id),
+                new Claim(Constan.ClaimTenantId, user.Id)
             };
 
             await userManager.AddClaimsAsync(user, claimsPersonalizados);
@@ -57,21 +58,14 @@ namespace Aldente.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
+        public IActionResult Login() => View();
+        
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel modelo)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(modelo);
-            }
+            if (!ModelState.IsValid) return View(modelo);
 
-            var result = await signInManager.PasswordSignInAsync(modelo.Email,
-                   modelo.Password, modelo.Recuerdame, lockoutOnFailure: false);
+            var result = await signInManager.PasswordSignInAsync(modelo.Email, modelo.Password, modelo.Recuerdame, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
@@ -83,8 +77,6 @@ namespace Aldente.Controllers
                 return View(modelo);
             }
         }
-
-
 
     }
 }
