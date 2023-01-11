@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.33027.164
+VisualStudioVersion = 16.0.33214.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aldente", "Aldente\Aldente.csproj", "{1A040754-05C9-4ABA-9EE0-EE344C735DD9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aldente", "Aldente\Aldente.csproj", "{9125BC05-3E50-4DD9-9654-D89990892071}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1A040754-05C9-4ABA-9EE0-EE344C735DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A040754-05C9-4ABA-9EE0-EE344C735DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A040754-05C9-4ABA-9EE0-EE344C735DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A040754-05C9-4ABA-9EE0-EE344C735DD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9125BC05-3E50-4DD9-9654-D89990892071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9125BC05-3E50-4DD9-9654-D89990892071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9125BC05-3E50-4DD9-9654-D89990892071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9125BC05-3E50-4DD9-9654-D89990892071}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F33EF985-9BBB-4220-9120-C45EA8B3F356}
+		SolutionGuid = {42DAE714-D9F5-4265-96DA-CF02C8A97166}
 	EndGlobalSection
 EndGlobal
