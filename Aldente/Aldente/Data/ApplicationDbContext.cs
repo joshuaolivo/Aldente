@@ -1,4 +1,5 @@
-﻿using Aldente.Services;
+﻿using Aldente.Data.Entities;
+using Aldente.Services;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +16,8 @@ namespace Aldente.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         private string tenantId { get; set; }
+        public DbSet<Restaurante> Restaurantes { get; set; }
+        public DbSet<Platillo> Platillos { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ITenantService tenant) : base(options)
         {
             tenantId = tenant.getTenant();
