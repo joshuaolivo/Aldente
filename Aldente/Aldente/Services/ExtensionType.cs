@@ -19,7 +19,7 @@ namespace Aldente.Services
                     t.IsAssignableFrom(typeof(IdentityUserRole<string>)),
                     t.IsAssignableFrom(typeof(IdentityUserToken<string>)),
                     t.IsAssignableFrom(typeof(IdentityUserClaim<string>)),
-                    typeof(ITenantEntity).IsAssignableFrom(t)
+                    typeof(ICommonEntity).IsAssignableFrom(t)
             };
 
             return boleans.Aggregate((b1, b2) => b1 || b2);
