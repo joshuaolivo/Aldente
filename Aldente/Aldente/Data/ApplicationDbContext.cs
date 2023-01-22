@@ -18,6 +18,8 @@ namespace Aldente.Data
         private string tenantId { get; set; }
         public DbSet<Restaurante> Restaurantes { get; set; }
         public DbSet<Platillo> Platillos { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<SubCategoia> subCategoias { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ITenantService tenant) : base(options)
         {
             tenantId = tenant.getTenant();

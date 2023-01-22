@@ -20,7 +20,7 @@ namespace Aldente.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public IActionResult Index() => View();
+        public IActionResult Logoin() => View();
         public IActionResult SingIn() => View();
         [HttpPost]
         public async Task<IActionResult> Registro(SingInModel modelo)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Aldente.Data.Entities
 {
-    public class Platillo : ITenantEntity
+    public class Platillo : ICommonEntity
     {
         [Key]
         public int Id { get; set; }
@@ -21,6 +21,6 @@ namespace Aldente.Data.Entities
         public string Descripcion { get; set; }
         [Required]
         public double Precio { get; set; }
-        public string TenantId { get; set; }
+        public virtual ICollection<SubCategoia> SubCategoia_id { get; set; }
     }
 }

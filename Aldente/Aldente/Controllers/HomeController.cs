@@ -1,4 +1,5 @@
-﻿using Aldente.Models;
+﻿using Aldente.DTOs;
+using Aldente.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,11 +19,8 @@ namespace Aldente.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        public IActionResult Index() => View(new List<PlatillaRestauranteDTO>() { new PlatillaRestauranteDTO { Logo = null, Id = 1, Nombre = "SubWay" } });
+        
         public IActionResult Privacy()
         {
             return View();

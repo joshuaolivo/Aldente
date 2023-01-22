@@ -22,7 +22,7 @@ namespace Aldente.Data.Entities
         [Required]
         public string Direccion { get; set; }
         [Required]
-        public string Logo { get; set; }
+        public byte[] Logo { get; set; }
 
     }
 }
