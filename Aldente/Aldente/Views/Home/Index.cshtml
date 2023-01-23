@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Aldente.DTOs.PlatillaRestauranteDTO>
+﻿@model IEnumerable<Aldente.Data.Entities.Restaurante>
 
 @{
     ViewData["Title"] = "Index";
@@ -8,7 +8,7 @@
 @foreach (var item in Model) {
 <div>
     <div class="img">
-        <img class="" src="@item.Imagen" alt="Card image cap">
+        <img class="" src="data:;base64,@(Convert.ToBase64String(item.Logo))" alt="Card image cap">
     </div>
     <div class="cuerpo">
         <h5>@item.Nombre</h5>

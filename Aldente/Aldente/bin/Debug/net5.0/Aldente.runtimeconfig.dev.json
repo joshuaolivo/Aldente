@@ -1,9 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\nadad\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\nadad\\.nuget\\packages",
-      "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      "C:\\Users\\elagu\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\elagu\\.nuget\\packages"
     ]
   }
 }
