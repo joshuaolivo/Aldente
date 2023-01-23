@@ -1,35 +1,31 @@
 ﻿@model Aldente.Models.LoginModel
 
 @{
-    ViewData["Title"] = "Logoin";
+    ViewData["Title"] = "Login";
 }
 
-<h1>Acceso al sistema</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"> Correo</label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label">Contraseña</label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Recuerdame" /> @Html.DisplayNameFor(model => model.Recuerdame)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Iniciar sesion" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+<div class="w-100 text-center my-5">
+    <h1 class="ftfoodsecret-regular fw-bold ftsize-85">ACCESO AL SISTEMA</h1>
+</div>
+
+<div class="my-3 mb-5 mx-auto col-lg-5 rounded shadow-lg p-5">
+    <form asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="alert alert-warning ftfoodsecret-regular"></div>
+        <div>
+            <input asp-for="Email" class="textbox-sam ftfoodsecret-regular p-3 ftsize-22 my-4" placeholder="Nombre de usuario" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="Password" class="textbox-sam ftfoodsecret-regular p-3 ftsize-22 my-4" placeholder="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Recuerdame" /> @Html.DisplayNameFor(model => model.Recuerdame)
+            </label>
+        </div>
+        <button type="submit" class="btnlogin-sam my-4 w-100">Ingresar</button>
+    </form>
 </div>
 
 @section Scripts {

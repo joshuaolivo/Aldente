@@ -1,14 +1,146 @@
 ﻿@model IEnumerable<Aldente.Data.Entities.Platillo>
 
 @{
-    ViewData["Title"] = "Show";
+    ViewData["Title"] = "Home";
 }
 
-<h1>Show</h1>
+<p class="ftfoodsecret-regular ftsize-85 fw-bold mt-5 mb-3 text-center">Nombre Restaurante</p>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="shadow rounded-4 p-1 mb-2 mx-auto" style="width: 210px; height: 210px;">
+    <img src="/assets/images/burger-2013191_1280.png" class="card-img-top rounded-4">
+</div>
+
+<div class="my-3 mt-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="ftfoodsecret-regular fw-bold">Lista de platillos</h2>
+            <div class="lineseparator"></div>
+        </div>
+        <div class="col-lg-6 justify-content-end d-flex">
+            <a class="btnsuccess-sam px-3 m-1 btn-sam" asp-action="Create">
+                Agregar nuevo platillo
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-plus-lg ms-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+        <div class="container bg-veige p-4 rounded ftfoodsecret-regular ftsize-22 fw-bold">
+            <div class="row my-1">
+                <div class="col-md-2 ftcolor-orange">
+                    Buscar elemento
+                </div>
+                <div class="col-md-10">
+                    <input type="text" placeholder="Nombre del elemento..." class="w-100 textbox-sam px-3 py-1"
+                        required />
+                </div>
+            </div>
+            <hr style="background-color: #F4B700; border: none; height: 3px;" />
+            <div class="row my-1">
+                <div class="row">
+                    <div class="col ftcolor-orange">
+                        Filtrar busqueda por:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 ftcolor-orange">
+                        Categoria:
+                    </div>
+                    <div class="col-md-4">
+                        <select name="categoria" id="categoria" aria-placeholder="Seleccionar"
+                            class="w-100 textbox-sam px-3 py-1 dropdown-sam">
+                            <option value="">Seleccionar</option>
+                            <option value="value2">Value 2</option>
+                            <option value="value3">Value 3</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 ftcolor-orange">
+                        Subcategoria
+                    </div>
+                    <div class="col-md-4">
+                        <select name="subcategoria" id="subcategoria" aria-placeholder="Seleccionar"
+                            class="w-100 textbox-sam px-3 py-1 dropdown-sam">
+                            <option value="">Seleccionar</option>
+                            <option value="value2">Value 2</option>
+                            <option value="value3">Value 3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<div name="platillos" class="my-3">
+    @foreach (var item in Model) {
+    <div class="rounded-4 shadow w-100 my-3">
+        <div class="bg-secondarysam ftfoodlist-regular text-center p-1 rounded-top-4 fw-bolder ftsize-27">
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </div>
+        <div class="bg-white p-2 rounded-bottom-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="@(item.Imagen != null ? "data:;base64,"+Convert.ToBase64String(item.Imagen) : "/assets/images/camera-1265913_1280.png")" class="img-fluid p-2 img-thumbnail" />
+                </div>
+                <div class="col-md-8 ftsize-22">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <span class="ftfoodsecret-regular fw-bold">Tamaño: </span><span class="ftfoodlist-regular">{Tamaño}</span>
+                        </div>
+                        <div class="col-sm-5">
+                            <span class="ftfoodsecret-regular fw-bold">Proporcion: </span><span  class="ftfoodlist-regular">{Proporcion}</span><span  class="ftfoodlist-regular">{Unidad}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <span class="ftfoodsecret-regular fw-bold ftcolor-green">Precio: </span><span class="ftfoodlist-regular">$ @Html.DisplayFor(modelItem => item.Precio)</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span class="ftfoodsecret-regular fw-bold">Categoria: </span><span class="ftfoodlist-regular">{Categoria}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <span class="ftfoodsecret-regular fw-bold">Subcategoria: </span><span
+                            class="ftfoodlist-regular">{Tamaño}</span>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="row">
+                            <span class="ftfoodsecret-regular fw-bold">Descripcion: </span>
+                        </div>
+                        <div class="row">
+                            <span class="ftfoodlist-regular">
+                                @Html.DisplayFor(modelItem => item.Descripcion)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 d-flex flex-column justify-content-around">
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                        fill="currentColor" class="bi bi-pencil-fill btnedit-sam" viewBox="0 0 16 16">
+                            <path
+                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                        </svg>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="w-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                        fill="currentColor" class="bi bi-trash-fill btndelete-sam" viewBox="0 0 16 16">
+                            <path
+                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+@*
 <table class="table">
     <thead>
         <tr>
@@ -19,8 +151,7 @@
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @*Tenemos que buscar como mandar los bytes al UI*@
-                @*@Html.DisplayNameFor(model => model.Imagen)*@
+                @Html.DisplayNameFor(model => model.Imagen)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
@@ -40,9 +171,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
-            @*<td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Imagen)
-            </td>*@
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
@@ -58,3 +189,4 @@
 }
     </tbody>
 </table>
+*@

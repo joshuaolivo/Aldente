@@ -3,50 +3,102 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Agregar platillo";
 }
+<p class="ftfoodsecret-regular ftsize-65 fw-bold mt-5 mb-3 text-center">Agregar platillo</p>
 
-<h1>Create</h1>
-
-<h4>Añadir platillo nuevo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <input asp-for="Restaurante" class="form-control" value="" />
+<form asp-action="Create" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div>
+        <div class="shadow rounded-4 p-1 mb-2 mx-auto w-25">
+            <img id="ImgSelected" src="/assets/images/burger-2013191_1280.png" class="img-fluid rounded-4" />
+        </div>
+        <div class="w-100 text-center my-4">
+            <label for="ImgSelector">
+                <div class="my-2 btnorange-sam p-2 px-4 mx-auto ftfoodlist-regular" style="cursor: pointer;">
+                    Seleccionar archivo
+                    <input id="ImgSelector" asp-for="Img" style="display: none;" onchange="previewImage(event);" type="file"/>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Nombre" class="control-label"></label>
-                    <input asp-for="Nombre" class="form-control"/>
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Img" class="control-label"></label>
-                    <input asp-for="Img" class="form-control" type="file"/>
-                    <span asp-validation-for="Img" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Descripcion" class="control-label"></label>
-                    <input asp-for="Descripcion" class="form-control" />
-                    <span asp-validation-for="Descripcion" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Precio" class="control-label"></label>
-                    <input asp-for="Precio" class="form-control" />
-                    <span asp-validation-for="Precio" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-        </form>
+            </label>
+            <span asp-validation-for="Img" class="text-danger"></span>
+        </div>
     </div>
-</div>
+    <div class="my-5">
+        <h2 class="ftfoodsecret-regular fw-bold">Generalidades</h2>
+        <div class="lineseparator"></div>
+        <div class="row my-4">
+            <div class="col-lg-6">
+                <input asp-for="Nombre" class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Nombre del platillo" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+                <textarea asp-for="Descripcion" class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Descripcion" rows="8"></textarea>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="col-lg-6">
+                <select name="categoria" id="categoria" aria-placeholder="Seleccionar"
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                    <option value="">Categoria</option>
+                    <option value="value2">Value 2</option>
+                    <option value="value3">Value 3</option>
+                </select>
+                <select name="subcategoria" id="subcategoria" aria-placeholder="Seleccionar"
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                    <option value="">Subcategoria</option>
+                    <option value="value2">Value 2</option>
+                    <option value="value3">Value 3</option>
+                </select>
+                <input asp-for="Precio" class="textbox-green-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Precio" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="my-5">
+        <h2 class="ftfoodsecret-regular fw-bold">Dimensiones</h2>
+        <div class="lineseparator"></div>
+        <div class="row my-4">
+            <div class="col-lg-4">
+                <select name="tamanio" id="tamanio" aria-placeholder="Seleccionar"
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                    <option value="">Tamaño</option>
+                    <option value="value2">Value 2</option>
+                    <option value="value3">Value 3</option>
+                </select>
+            </div>
+            <div class="col-lg-4">
+                <input type="number" placeholder="Unidades"
+                class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" />
+            </div>
+            <div class="col-lg-4">
+                <select name="proporcion" id="proporcion" aria-placeholder="Seleccionar"
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                    <option value="">Proporcion</option>
+                    <option value="value2">Value 2</option>
+                    <option value="value3">Value 3</option>
+                </select>
+            </div>
+        </div>
+        <div class="row my-5 justify-content-center">
+            <div class="form-group">
+                <input asp-for="Restaurante" class="form-control" value="" />
+            </div>
+        </div>
+        <div class="row my-5 justify-content-center">
+            <a asp-action="Index" class="btn-sam btngray-sam w-25 m-2 text-center">Cancelar</a>
+            <input type="submit" value="Registrar" class="btnsuccess-sam w-25 m-2" />
+        </div>
+    </div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script>
+    const previewImage = (event) => {
+    const imageFiles = event.target.files;
+    const imageFilesLength = imageFiles.length;
+    if (imageFilesLength > 0) {
+        const imageSrc = URL.createObjectURL(imageFiles[0]);
+        const imagePreviewElement = document.getElementById("ImgSelected");
+        imagePreviewElement.src = imageSrc;
+    }
+};
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

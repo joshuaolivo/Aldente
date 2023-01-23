@@ -1,17 +1,31 @@
 ﻿@model IEnumerable<Aldente.Data.Entities.Restaurante>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Inicio";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@foreach (var item in Model) {
-<div>
-    <div class="img">
-        <img class="" src="data:;base64,@(Convert.ToBase64String(item.Logo))" alt="Card image cap">
-    </div>
-    <div class="cuerpo">
-        <h5>@item.Nombre</h5>
+
+<div class="containerbanner">
+    <img src="/assets/images/food-3594552_1920.jpg" class="img-fluid imgindexbanner w-100 my-4 rounded-4" />
+    <div class="imgtext-bl text-start gradient-overlay rounded-bottom-4">
+        <div class="ftrestaurant-regular fw-bolder ftsize-85 mb-0">SAM</div>
+            <span class="ftfoodsecret-regular ftsize-35">Sistema de Almacenamiento de Menus</span>
     </div>
 </div>
-}
+<div class="my-3">
+    <h2 class="ftfoodsecret-regular fw-bold">Restaurantes</h2>
+    <div class="lineseparator"></div>
+</div>
+<div name="restaurantes" class="my-3 d-flex flex-wrap justify-content-between">
+    @foreach (var item in Model) {
+    <a class="card rounded-4 mb-2 card-shadow card-text" style="width: 18rem;" role="button" id="restaurante_@item.Nombre" href="menu.html">
+        <img src="@(item.Logo != null ? "data:;base64,"+Convert.ToBase64String(item.Logo) : "/assets/images/burger-2013191_1280.png")" class="card-img-top rounded-top-4">
+        <div class="card-body bg-secondarysam rounded-bottom-4">
+            <h3 class="card-title ftfoodlist-regular ftsize-35 fw-bold text-center">@item.Nombre</h3>
+        </div>
+    </a>
+    }
+</div>
+
+
