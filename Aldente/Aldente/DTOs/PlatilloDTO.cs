@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Aldente.DTOs
 {
-    public class PlatillaRestauranteDTO
+    public class PlatilloDTO
     {
-        public int Id { get; set; }
-        public IFormFile Imagen { get; set; }
         public string Nombre { get; set; }
-
+        public IFormFile Img{ get; set; }
+        public string Descripcion { get; set; }
+        public double Precio { get; set; }
+        public int Restaurante { get; set; }
     }
 }

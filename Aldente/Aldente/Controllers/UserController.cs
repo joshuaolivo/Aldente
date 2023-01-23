@@ -20,7 +20,7 @@ namespace Aldente.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public IActionResult Logoin() => View();
+        public IActionResult Login() => View();
         public IActionResult SingIn() => View();
         [HttpPost]
         public async Task<IActionResult> Registro(SingInModel modelo)
@@ -56,9 +56,6 @@ namespace Aldente.Controllers
             }
 
         }
-
-        [HttpGet]
-        public IActionResult Login() => View();
         
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel modelo)
@@ -69,7 +66,7 @@ namespace Aldente.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Show", "Platillos");
             }
             else
             {

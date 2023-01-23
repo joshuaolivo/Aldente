@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Aldente.Controllers
 {
-    public class RestaurantesController : Controller
+    public class PlatillosController : Controller
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
 
-        public RestaurantesController(ApplicationDbContext dbContext, IMapper mapper)
+        public PlatillosController(ApplicationDbContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
@@ -25,7 +25,7 @@ namespace Aldente.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return View();        
+                return View();
             }
             else
             {
@@ -33,23 +33,29 @@ namespace Aldente.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(RestauranteDTO restaurnateDTO) {
+        public async Task<IActionResult> CreateAsync(PlatilloDTO platilloDTO)
+        {
             if (User.Identity.IsAuthenticated)
             {
-                var restaurante = mapper.Map<Restaurante>(restaurnateDTO);
+                var platillo = mapper.Map<Platillo>(platilloDTO);
                 using (var ms = new MemoryStream())
                 {
-                    restaurnateDTO.Imagen.CopyTo(ms);
-                    restaurante.Logo = ms.ToArray();
+                    platilloDTO.Img.CopyTo(ms);
+                    platillo.Imagen = ms.ToArray();
                 }
-                dbContext.Add(restaurante);
+                dbContext.Add(platillo);
                 await dbContext.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                 return Unauthorized();   
+                return Unauthorized();
             }
         }
+        public IActionResult Show()
+        {
+            return View(dbContext.Platillos.ToList());
+        }
+
     }
 }
