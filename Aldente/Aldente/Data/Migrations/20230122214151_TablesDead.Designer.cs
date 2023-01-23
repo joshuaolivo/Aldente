@@ -4,124 +4,22 @@ using Aldente.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Aldente.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230122214151_TablesDead")]
+    partial class TablesDead
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Aldente.Data.Entities.Categoria", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SubCategoiaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubCategoiaId");
-
-                    b.ToTable("Categorias");
-                });
-
-            modelBuilder.Entity("Aldente.Data.Entities.Platillo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Imagen")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Precio")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Platillos");
-                });
-
-            modelBuilder.Entity("Aldente.Data.Entities.Restaurante", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Correo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Logo")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PlatilloId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlatilloId");
-
-                    b.ToTable("Restaurantes");
-                });
-
-            modelBuilder.Entity("Aldente.Data.Entities.SubCategoia", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PlatilloId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlatilloId");
-
-                    b.ToTable("subCategoias");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -323,27 +221,6 @@ namespace Aldente.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Aldente.Data.Entities.Categoria", b =>
-                {
-                    b.HasOne("Aldente.Data.Entities.SubCategoia", null)
-                        .WithMany("Id_Categoria")
-                        .HasForeignKey("SubCategoiaId");
-                });
-
-            modelBuilder.Entity("Aldente.Data.Entities.Restaurante", b =>
-                {
-                    b.HasOne("Aldente.Data.Entities.Platillo", null)
-                        .WithMany("Restaurante_Id")
-                        .HasForeignKey("PlatilloId");
-                });
-
-            modelBuilder.Entity("Aldente.Data.Entities.SubCategoia", b =>
-                {
-                    b.HasOne("Aldente.Data.Entities.Platillo", null)
-                        .WithMany("SubCategoia_id")
-                        .HasForeignKey("PlatilloId");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -393,18 +270,6 @@ namespace Aldente.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Aldente.Data.Entities.Platillo", b =>
-                {
-                    b.Navigation("Restaurante_Id");
-
-                    b.Navigation("SubCategoia_id");
-                });
-
-            modelBuilder.Entity("Aldente.Data.Entities.SubCategoia", b =>
-                {
-                    b.Navigation("Id_Categoria");
                 });
 #pragma warning restore 612, 618
         }

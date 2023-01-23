@@ -1,5 +1,7 @@
-﻿using Aldente.DTOs;
+﻿using Aldente.Data;
+using Aldente.DTOs;
 using Aldente.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,14 +15,27 @@ namespace Aldente.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext dbContext;
+        private readonly IMapper mapper;
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext, IMapper mapper)
         {
             _logger = logger;
+            this.dbContext = dbContext;
+            this.mapper = mapper;
         }
 
-        public IActionResult Index() => View(new List<PlatillaRestauranteDTO>() { new PlatillaRestauranteDTO { Logo = null, Id = 1, Nombre = "SubWay" } });
-        
+        public IActionResult Index()
+        {
+            var rest = dbContext.Restaurantes.ToList();
+            List<PlatillaRestauranteDTO> restaurantes = new List<PlatillaRestauranteDTO>();
+            foreach (var restaurante in rest)
+            {
+                //NECESITAMOs VER COMO MANDAMOS LOS BYTES AL UI 
+                var restarant = mapper.Map<PlatillaRestauranteDTO>(restaurante);
+                restaurantes.Add(restarant);
+            }
+            return View(restaurantes);   
+        }
         public IActionResult Privacy()
         {
             return View();

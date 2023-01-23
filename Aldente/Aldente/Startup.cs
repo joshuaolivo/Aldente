@@ -1,5 +1,7 @@
 using Aldente.Data;
+using Aldente.DTOs.MapperProfile;
 using Aldente.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +40,11 @@ namespace Aldente
             services.AddControllersWithViews();
             //Independency Inyection 
             services.AddTransient<ITenantService, TenantServices>();
+            var mapperConfig = new MapperConfiguration(m => {
+                m.AddProfile(new MapperProfile());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
