@@ -30,11 +30,10 @@ namespace Aldente.Controllers
             List<PlatillaRestauranteDTO> restaurantes = new List<PlatillaRestauranteDTO>();
             foreach (var restaurante in rest)
             {
-                //NECESITAMOs VER COMO MANDAMOS LOS BYTES AL UI 
                 var restarant = mapper.Map<PlatillaRestauranteDTO>(restaurante);
                 restaurantes.Add(restarant);
             }
-            return View(restaurantes);   
+            return View(rest);   
         }
         public IActionResult Privacy()
         {

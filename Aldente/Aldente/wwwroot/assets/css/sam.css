@@ -1,0 +1,304 @@
+.bg-primarysam {
+    background-color: #79163C;
+}
+
+.bg-primarylightsam {
+    background-color: #9C1F4D;
+}
+
+.bg-secondarysam {
+    background-color: #F4B700;
+}
+
+.bg-footergray {
+    background-color: #E7E7E7;
+}
+
+.bg-veige {
+    background-color: #FFF2E7;
+}
+
+.btn-sam {
+    text-decoration: none !important;
+}
+
+.btnedit-sam {
+    color: #338CCC;
+    transition: 0.2s;
+}
+
+.btnedit-sam:hover {
+    color: #286fa1;
+}
+
+.btndelete-sam {
+    color: #D04343;
+    transition: 0.2s;
+}
+
+.btndelete-sam:hover {
+    color: #a53030;
+}
+
+
+.dropdown-sam {
+    appearance: none;
+    padding-right: 15px;
+    background-image: url('/assets/images/chevron-down.svg');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px);
+    background-size: 30px;
+}
+
+.textbox-sam {
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid #F4B700;
+    outline: none;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.textbox-sam:focus {
+    border: 1px solid #f7cd50;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(228, 207, 18, 0.6);
+}
+
+.textbox-green-sam {
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid #65CF95;
+    outline: none;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.textbox-green-sam:focus {
+    border: 1px solid #65CF95;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(18, 228, 147, 0.6);
+}
+
+
+.btnlogin-sam {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #16A58A;
+    color: white;
+    font-family: 'foodsecret';
+    font-size: 22px;
+    outline: none;
+    border: none;
+    transition: 0.2s;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 0, 0, 0.274);
+}
+
+.btnlogin-sam:hover {
+    background-color: #14977f;
+}
+
+.btnlogin-sam:focus {
+    background-color: #107c68;
+}
+
+.btngray-sam {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #868686;
+    color: white;
+    font-family: 'foodsecret';
+    font-size: 22px;
+    outline: none;
+    border: none;
+    transition: 0.2s;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 0, 0, 0.274);
+}
+
+.btngray-sam:hover {
+    background-color: #777777;
+}
+
+.btngray-sam:focus {
+    background-color: #535353;
+}
+
+.btnsuccess-sam {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #00B050;
+    color: white;
+    font-family: 'foodsecret';
+    font-size: 22px;
+    outline: none;
+    border: none;
+    transition: 0.2s;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 0, 0, 0.274);
+}
+
+.btnsuccess-sam:hover {
+    background-color: #009e47;
+}
+
+.btnsuccess-sam:focus {
+    background-color: #009242;
+}
+
+.btnorange-sam {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #D26C2A;
+    color: white;
+    font-family: 'foodsecret';
+    font-size: 22px;
+    outline: none;
+    border: none;
+    transition: 0.2s;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 0, 0, 0.274);
+}
+
+.btnorange-sam:hover {
+    background-color: #b65e24;
+}
+
+.btnorange-sam:focus {
+    background-color: #a5511a;
+}
+
+.card-shadow {
+    box-shadow: 2px 2px 15px 1px rgba(0, 0, 0, 0.14);
+    transition: 0.1s;
+}
+
+.card-shadow:hover {
+    box-shadow: 2px 2px 20px 5px rgba(0, 0, 0, 0.20);
+}
+
+.card-text {
+    color: black;
+    text-decoration: none !important;
+}
+
+.fttitle-header {
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.fttitle-header:hover {
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.containerbanner {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.gradient-overlay {
+    display: inline-block;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+.imgtext-bl {
+    width: 100%;
+    position: absolute;
+    padding: 5%;
+    bottom: 24px;
+    left: 0px;
+}
+
+.imgindexbanner {
+    height: auto;
+    max-height: 700px;
+}
+
+.ftsize-22 {
+    font-size: 22px;
+}
+
+.ftsize-27 {
+    font-size: 27px;
+}
+
+.ftsize-35 {
+    font-size: 35px;
+}
+
+.ftsize-65 {
+    font-size: 65px;
+}
+
+.ftsize-85 {
+    font-size: 85px;
+}
+
+.ftcolor-white {
+    color: white;
+}
+
+.ftcolor-orange {
+    color: #E0712A;
+}
+
+.ftcolor-green {
+    color: #018F73;
+}
+
+.ftrestaurant-regular {
+    font-family: 'restaurant';
+}
+
+.ftfoodlist-regular {
+    font-family: 'foodlist';
+}
+
+.ftfoodsecret-regular {
+    font-family: 'foodsecret';
+}
+
+@font-face {
+    font-family: 'restaurant';
+    src: url('/assets/fonts/restaurant-webfont.woff2') format('woff2'),
+        url('/assets/fonts/restaurant-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'foodlist';
+    src: url('/assets/fonts/foodlist-regular-webfont.woff2') format('woff2'),
+        url('/assets/fonts/foodlist-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'foodsecret';
+    src: url('/assets/fonts/foodsecret-regular-webfont.woff2') format('woff2'),
+        url('/assets/fonts/foodsecret-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/*Figuras*/
+
+.lineseparator {
+    position: relative;
+    width: 250px;
+    height: 1px;
+    background: #868686;
+}
+
+.lineseparator:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: #868686;
+    height: 10px;
+    width: 10px;
+    border-radius: 50px;
+}
