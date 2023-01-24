@@ -154,7 +154,6 @@ F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Aldente.TagH
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Aldente.RazorCoreGenerate.cache
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
-F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Razor\Views\Platillos\Create.cshtml.g.cs
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Razor\Views\Platillos\Show.cshtml.g.cs
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Razor\Views\Restaurantes\Create.cshtml.g.cs
@@ -173,3 +172,4 @@ F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Aldente.cspr
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\refint\Aldente.dll
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Aldente.genruntimeconfig.cache
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\ref\Aldente.dll
+F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Razor\Views\Home\Menu.cshtml.g.cs
