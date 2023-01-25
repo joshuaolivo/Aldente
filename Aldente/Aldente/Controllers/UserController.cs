@@ -25,6 +25,8 @@ namespace Aldente.Controllers
         [HttpPost]
         public async Task<IActionResult> Registro(SingInModel modelo)
         {
+            
+ 
             if (!ModelState.IsValid)
             {
                 return View(modelo);

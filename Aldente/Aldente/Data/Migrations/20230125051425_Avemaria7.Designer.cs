@@ -4,14 +4,16 @@ using Aldente.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Aldente.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230125051425_Avemaria7")]
+    partial class Avemaria7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +43,6 @@ namespace Aldente.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoriaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -59,19 +58,7 @@ namespace Aldente.Data.Migrations
                     b.Property<double>("Precio")
                         .HasColumnType("float");
 
-                    b.Property<int?>("RestauranteId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SubCategoiaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoriaId");
-
-                    b.HasIndex("RestauranteId");
-
-                    b.HasIndex("SubCategoiaId");
 
                     b.ToTable("Platillos");
                 });
@@ -98,6 +85,9 @@ namespace Aldente.Data.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PlatilloId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Telefono")
                         .IsRequired()
                         .HasMaxLength(13)
@@ -108,6 +98,8 @@ namespace Aldente.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PlatilloId");
 
                     b.ToTable("Restaurantes");
                 });
@@ -332,25 +324,11 @@ namespace Aldente.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Aldente.Data.Entities.Platillo", b =>
+            modelBuilder.Entity("Aldente.Data.Entities.Restaurante", b =>
                 {
-                    b.HasOne("Aldente.Data.Entities.Categoria", "Categoria")
-                        .WithMany()
-                        .HasForeignKey("CategoriaId");
-
-                    b.HasOne("Aldente.Data.Entities.Restaurante", "Restaurante")
-                        .WithMany()
-                        .HasForeignKey("RestauranteId");
-
-                    b.HasOne("Aldente.Data.Entities.SubCategoia", "SubCategoia")
-                        .WithMany()
-                        .HasForeignKey("SubCategoiaId");
-
-                    b.Navigation("Categoria");
-
-                    b.Navigation("Restaurante");
-
-                    b.Navigation("SubCategoia");
+                    b.HasOne("Aldente.Data.Entities.Platillo", null)
+                        .WithMany("Restaurante_Id")
+                        .HasForeignKey("PlatilloId");
                 });
 
             modelBuilder.Entity("Aldente.Data.Entities.SubCategoia", b =>
@@ -411,6 +389,11 @@ namespace Aldente.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Aldente.Data.Entities.Platillo", b =>
+                {
+                    b.Navigation("Restaurante_Id");
                 });
 #pragma warning restore 612, 618
         }

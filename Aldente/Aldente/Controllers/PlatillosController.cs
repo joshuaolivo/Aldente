@@ -25,6 +25,8 @@ namespace Aldente.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                ViewBag.Categorias = dbContext.Categorias.ToList();
+                ViewBag.SubCategorias = dbContext.subCategoias.ToList();
                 return View();
             }
             else
@@ -33,7 +35,7 @@ namespace Aldente.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(PlatilloDTO platilloDTO)
+        public async Task<IActionResult> Create(PlatilloDTO platilloDTO)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -54,7 +56,12 @@ namespace Aldente.Controllers
         }
         public IActionResult Show()
         {
-            return View(dbContext.Platillos.ToList());
+            var platos = (from p in dbContext.Platillos
+                          join r in dbContext.Restaurantes
+                          on p.Restaurante equals r
+                          //where r.user == 
+                          select new Platillo { Nombre = p.Nombre, Id = p.Id, Categoria = new Categoria { Id = p.Categoria.Id, Nombre = p.Categoria.Nombre }, Descripcion = p.Descripcion, Imagen = p.Imagen, Precio = p.Precio, Restaurante = new Restaurante { Id = p.Restaurante.Id }, SubCategoia = new SubCategoia { Id = p.SubCategoia.Id } }).ToList();
+            return View(platos);
         }
 
     }

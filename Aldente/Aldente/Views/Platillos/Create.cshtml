@@ -35,16 +35,20 @@
             </div>
             <div class="col-lg-6">
                 <select name="categoria" id="categoria" aria-placeholder="Seleccionar"
-                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
-                    <option value="">Categoria</option>
-                    <option value="value2">Value 2</option>
-                    <option value="value3">Value 3</option>
+                        class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                    <option hidden>Categoria</option>
+                    @foreach (var cat in ViewBag.Categorias)
+                    {
+                        <option value="@cat.Id">@cat.Nombre</option>
+                    }
                 </select>
                 <select name="subcategoria" id="subcategoria" aria-placeholder="Seleccionar"
-                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
-                    <option value="">Subcategoria</option>
-                    <option value="value2">Value 2</option>
-                    <option value="value3">Value 3</option>
+                        class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                    <option hidden>Subcategoria</option>
+                    @foreach (var sbcat in ViewBag.SubCategorias)
+                    {
+                        <option value="@sbcat.Id">@sbcat.Nombre</option>
+                    }
                 </select>
                 <input asp-for="Precio" class="textbox-green-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Precio" />
                 <span asp-validation-for="Precio" class="text-danger"></span>
@@ -57,7 +61,8 @@
         <div class="row my-4">
             <div class="col-lg-4">
                 <select name="tamanio" id="tamanio" aria-placeholder="Seleccionar"
-                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                        class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                    
                     <option value="">Tamaño</option>
                     <option value="value2">Value 2</option>
                     <option value="value3">Value 3</option>
@@ -76,9 +81,10 @@
                 </select>
             </div>
         </div>
+      
         <div class="row my-5 justify-content-center">
             <div class="form-group">
-                <input asp-for="Restaurante" class="form-control" value="" />
+                <input asp-for="Rest" class="form-control" value="" />
             </div>
         </div>
         <div class="row my-5 justify-content-center">
