@@ -15,7 +15,6 @@ namespace Aldente.Controllers
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
-
         public PlatillosController(ApplicationDbContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
@@ -51,9 +50,12 @@ namespace Aldente.Controllers
                     platilloDTO.Img.CopyTo(ms);
                     platillo.Imagen = ms.ToArray();
                 }
+                platillo.Categoria = dbContext.Categorias.Where(e => e.Id == platilloDTO.CategoriaInt).First();
+                platillo.SubCategoia = dbContext.subCategoias.Where(e => e.Id == platilloDTO.SubCategoiaInt).First();
+                platillo.Restaurante = dbContext.Restaurantes.Where(e => e.user == User.Identity.Name).First();
                 dbContext.Add(platillo);
                 await dbContext.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Show", "Platillos");
             }
             else
             {
@@ -69,19 +71,27 @@ namespace Aldente.Controllers
                 ViewBag.RestauranteLogo = restaurante.Logo;
                 ViewBag.Categorias = dbContext.Categorias.ToList();
                 ViewBag.SubCategorias = dbContext.subCategoias.ToList();
+
                 var platos = (from p in dbContext.Platillos
                               join r in dbContext.Restaurantes
                               on p.Restaurante equals r
                               //where r.user == 
-                              select new Platillo { Nombre = p.Nombre, Id = p.Id, Categoria = new Categoria { Id = p.Categoria.Id, Nombre = p.Categoria.Nombre }, Descripcion = p.Descripcion, Imagen = p.Imagen, Precio = p.Precio, Restaurante = new Restaurante { Id = p.Restaurante.Id }, SubCategoia = new SubCategoia { Id = p.SubCategoia.Id } }).ToList();
+                              select new Platillo { Nombre = p.Nombre, Id = p.Id, Categoria = new Categoria { Id = p.Categoria.Id, Nombre = p.Categoria.Nombre } , Descripcion = p.Descripcion, Imagen = p.Imagen, Precio = p.Precio, Restaurante = new Restaurante { Id = p.Restaurante.Id }, SubCategoia = new SubCategoia { Id = p.SubCategoia.Id, Nombre = p.SubCategoia.Nombre }, Proporcion = p.Proporcion, Tamanio = p .Tamanio, Unidad = p.Unidad }).ToList();
+
                 return View(platos);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                return RedirectToAction("Create", "Restaurantes");
             }
-            return RedirectToAction("Create", "Restaurantes");
         }
 
+        public async Task<IActionResult> Delete(int id )
+        {
+            var platillo = dbContext.Platillos.Where(p => p.Id == id).First();
+            dbContext.Remove(platillo);
+            await dbContext.SaveChangesAsync();
+            return RedirectToAction("Show");
+        }
     }
 }
