@@ -39,12 +39,13 @@ namespace Aldente.Controllers
                 var restaurante = mapper.Map<Restaurante>(restaurnateDTO);
                 using (var ms = new MemoryStream())
                 {
-                    restaurnateDTO.Imagen.CopyTo(ms);
+                    restaurnateDTO.Img.CopyTo(ms);
                     restaurante.Logo = ms.ToArray();
                 }
+                restaurante.user = User.Identity.Name;
                 dbContext.Add(restaurante);
                 await dbContext.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Show", "Platillos");
             }
             else
             {

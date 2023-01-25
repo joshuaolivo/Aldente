@@ -7,6 +7,9 @@
 }
 <p class="ftfoodsecret-regular ftsize-65 fw-bold mt-5 mb-3 text-center">Agregar platillo</p>
 
+<script>
+</script>
+
 <form asp-action="Create" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div>
@@ -35,17 +38,18 @@
             </div>
             <div class="col-lg-6">
                 <select name="categoria" id="categoria" aria-placeholder="Seleccionar"
-                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam" onchange="changeElems();">
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam" onchange="changeSubCatsElems();">
                     <option disabled selected>Categoria</option>
-                    <option value="Alimentos">Alimentos</option>
-                    <option value="Bebidas">Bebidas</option>
-                    <option value="Postres">Postres</option>
+                    @foreach (var cat in ViewBag.Categorias)
+                    {
+                        <option value="@cat.Id">@cat.Nombre</option>
+                    }
                 </select>
                 <select name="subcategoria" id="subcategoria" aria-placeholder="Seleccionar"
-                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam" disabled>
                     <option disabled selected>Subcategoria</option>
                 </select>
-                <input asp-for="Precio" class="textbox-green-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Precio" />
+                <input type="number" step=".01"  asp-for="Precio" class="textbox-green-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Precio" />
                 <span asp-validation-for="Precio" class="text-danger"></span>
             </div>
         </div>
@@ -63,7 +67,7 @@
                 </select>
             </div>
             <div class="col-lg-4">
-                <input type="number" placeholder="Unidades"
+                <input type="number" min="1" step="1" placeholder="Unidades"
                 class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" />
             </div>
             <div class="col-lg-4">
@@ -77,7 +81,7 @@
         </div>
         <div class="row my-5 justify-content-center">
             <div class="form-group">
-                <input asp-for="Restaurante" class="form-control" value="" />
+                <input asp-for="Rest" class="form-control" value="" />
             </div>
         </div>
         <div class="row my-5 justify-content-center">
@@ -86,6 +90,23 @@
         </div>
     </div>
 </form>
+
+<script>
+    function changeSubCatsElems() {
+        const subCats = @Html.Raw(Json.Serialize(ViewBag.SubCategorias));
+        var selectP = document.getElementById("categoria");
+        var selectS = document.getElementById("subcategoria");
+        selectS.removeAttribute("disabled");
+        $("#subcategoria").empty();
+        selectS.options.add(new Option("Subcategoria", "", false, true));
+        selectS.options[0].disabled = true;
+        for (var e in subCats) {
+            if (subCats[e].categorias_Id.id == selectP.value) {
+                selectS.options.add(new Option(subCats[e].nombre, subCats[e].id));
+            }
+        }
+    }
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

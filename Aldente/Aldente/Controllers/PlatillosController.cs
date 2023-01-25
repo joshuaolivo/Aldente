@@ -25,6 +25,8 @@ namespace Aldente.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                ViewBag.Categorias = dbContext.Categorias.ToList();
+                ViewBag.SubCategorias = dbContext.subCategoias.ToList();
                 return View();
             }
             else
@@ -32,6 +34,12 @@ namespace Aldente.Controllers
                 return RedirectToAction("Login", "User");
             }
         }
+
+        //public async Task<IActionResult> Create(PlatilloDTO platilloDTO)
+        //{
+        //    return View();
+        //}
+
         [HttpPost]
         public async Task<IActionResult> CreateAsync(PlatilloDTO platilloDTO)
         {
@@ -54,7 +62,25 @@ namespace Aldente.Controllers
         }
         public IActionResult Show()
         {
-            return View(dbContext.Platillos.ToList());
+            try
+            {
+                var restaurante = dbContext.Restaurantes.Where(e => e.user == User.Identity.Name).First();
+                ViewBag.RestauranteNombre = restaurante.Nombre;
+                ViewBag.RestauranteLogo = restaurante.Logo;
+                ViewBag.Categorias = dbContext.Categorias.ToList();
+                ViewBag.SubCategorias = dbContext.subCategoias.ToList();
+                var platos = (from p in dbContext.Platillos
+                              join r in dbContext.Restaurantes
+                              on p.Restaurante equals r
+                              //where r.user == 
+                              select new Platillo { Nombre = p.Nombre, Id = p.Id, Categoria = new Categoria { Id = p.Categoria.Id, Nombre = p.Categoria.Nombre }, Descripcion = p.Descripcion, Imagen = p.Imagen, Precio = p.Precio, Restaurante = new Restaurante { Id = p.Restaurante.Id }, SubCategoia = new SubCategoia { Id = p.SubCategoia.Id } }).ToList();
+                return View(platos);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return RedirectToAction("Create", "Restaurantes");
         }
 
     }
