@@ -53,10 +53,11 @@
                     </div>
                     <div class="col-md-4">
                         <select name="categoria" id="categoria" aria-placeholder="Seleccionar"
-                            class="w-100 textbox-sam px-3 py-1 dropdown-sam">
-                            <option value="">Seleccionar</option>
-                            <option value="value2">Value 2</option>
-                            <option value="value3">Value 3</option>
+                            class="w-100 textbox-sam px-3 py-1 dropdown-sam" onchange="changeElems();">
+                            <option disabled selected>Categoria</option>
+                            <option value="Alimentos">Alimentos</option>
+                            <option value="Bebidas">Bebidas</option>
+                            <option value="Postres">Postres</option>
                         </select>
                     </div>
                     <div class="col-md-2 ftcolor-orange">
@@ -65,9 +66,7 @@
                     <div class="col-md-4">
                         <select name="subcategoria" id="subcategoria" aria-placeholder="Seleccionar"
                             class="w-100 textbox-sam px-3 py-1 dropdown-sam">
-                            <option value="">Seleccionar</option>
-                            <option value="value2">Value 2</option>
-                            <option value="value3">Value 3</option>
+                            <option disabled selected>Subcategoria</option>
                         </select>
                     </div>
                 </div>

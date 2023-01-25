@@ -35,9 +35,20 @@ namespace Aldente.Controllers
             }
             return View(rest);   
         }
-        public IActionResult Privacy()
+        public async Task<IActionResult> Menu(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var men = dbContext.Platillos.ToList();
+                var res = await dbContext.Restaurantes.FindAsync(id);
+                ViewBag.Nombre = res.Nombre;
+                ViewBag.Logo = res.Logo;
+                return View(men);
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
