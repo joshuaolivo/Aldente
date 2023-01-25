@@ -22,7 +22,14 @@ namespace Aldente.Data.Entities
         public Categoria Categoria { get; set; }
         [Required]
         public Restaurante Restaurante { get; set; }
+        [Required]
         public SubCategoia SubCategoia { get; set; }
+        [Required]
+        public string Tamanio { get; set; }
+        [Required]
+        public double Proporcion { get; set; }
+        [Required]
+        public string Unidad { get; set; }
         public Platillo()
         {
             Categoria = new Categoria();

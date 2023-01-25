@@ -18,16 +18,16 @@
 <div id="platillos">
     @foreach (var item in Model)
    {
-       <div class="bg-primarylightsam p-3 mb-2 rounded-4 ftfoodlist-regular ftcolor-white text-center"
+       <div class="bg-primarylightsam p-1 mb-2 rounded-4 ftfoodlist-regular ftcolor-white text-center"
        style="width: 18rem;" name="categoria_subcategoria_nombre">
            <img src="@(item.Imagen != null ? "data:;base64,"+Convert.ToBase64String(item.Imagen) : "/assets/images/camera-1265913_1280.png")" class="img-fluid p-2 bg-white mb-3 rounded-4" />
            <div class="ftsize-22 fw-bold">@item.Nombre</div>
-           <div class="ftsize-22 fw-bold">345 gr.</div>
-           <div class="ftsize-35 fw-bold">@item.Precio</div>
+           <div class="ftsize-22 fw-bold">@item.Proporcion @item.Unidad.</div>
+           <div class="ftsize-35 fw-bold">$@item.Precio MXN.</div>
            <div class="ftsize-22" align="justify">
                @item.Descripcion
            </div>
-           <div class="ftsize-22 fw-bold">Tamaño: Grande</div>
+           <div class="ftsize-22 fw-bold">Tamaño: @item.Tamanio</div>
        </div>
    }
 </div>

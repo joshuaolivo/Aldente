@@ -11,7 +11,7 @@
 </script>
 
 <form asp-action="Create" enctype="multipart/form-data">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
     <div>
         <div class="shadow rounded-4 p-1 mb-2 mx-auto w-25">
             <img id="ImgSelected" src="/assets/images/burger-2013191_1280.png" class="img-fluid rounded-4" />
@@ -20,7 +20,7 @@
             <label for="ImgSelector">
                 <div class="my-2 btnorange-sam p-2 px-4 mx-auto ftfoodlist-regular" style="cursor: pointer;">
                     Seleccionar archivo
-                    <input id="ImgSelector" asp-for="Img" style="display: none;" onchange="previewImage(event);" type="file"/>
+                    <input id="ImgSelector" asp-for="Img" style="display: none;" onchange="previewImage(event);" type="file" required/>
                 </div>
             </label>
             <span asp-validation-for="Img" class="text-danger"></span>
@@ -31,7 +31,7 @@
         <div class="lineseparator"></div>
         <div class="row my-4">
             <div class="col-lg-6">
-                <input asp-for="Nombre" class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Nombre del platillo" />
+                <input asp-for="Nombre" class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Nombre del platillo" required />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
                 <textarea asp-for="Descripcion" class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Descripcion" rows="8"></textarea>
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
@@ -45,11 +45,15 @@
                         <option value="@cat.Id">@cat.Nombre</option>
                     }
                 </select>
+                <input asp-for="CategoriaInt" style="display: none;" id="categoria_input" />
+                <span asp-validation-for="CategoriaInt" class="text-danger"></span>
                 <select name="subcategoria" id="subcategoria" aria-placeholder="Seleccionar"
-                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam" disabled>
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam" onchange="changeSubcatInt();" disabled>
                     <option disabled selected>Subcategoria</option>
                 </select>
-                <input type="number" step=".01"  asp-for="Precio" class="textbox-green-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Precio" />
+                <input asp-for="SubCategoiaInt" style="display: none;" id="subcategoria_input" />
+                <span asp-validation-for="SubCategoiaInt" class="text-danger"></span>
+                <input type="number" step=".01"  asp-for="Precio" class="textbox-green-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Precio" required />
                 <span asp-validation-for="Precio" class="text-danger"></span>
             </div>
         </div>
@@ -59,34 +63,34 @@
         <div class="lineseparator"></div>
         <div class="row my-4">
             <div class="col-lg-4">
-                <select name="tamanio" id="tamanio" aria-placeholder="Seleccionar"
+                <select name="tamanio" id="tamanio" aria-placeholder="Seleccionar" asp-for="Tamanio"
                 class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
-                    <option value="">Tamaño</option>
-                    <option value="value2">Value 2</option>
-                    <option value="value3">Value 3</option>
+                    <option disabled selected>Tamaño</option>
+                    <option value="Grande">Grande</option>
+                    <option value="Mediano">Mediano</option>
+                    <option value="Chico">Chico</option>
                 </select>
+                <span asp-validation-for="Tamanio" class="text-danger"></span>
             </div>
             <div class="col-lg-4">
-                <input type="number" min="1" step="1" placeholder="Unidades"
-                class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" />
+                <input type="number" min="1" step="1" placeholder="Unidades" asp-for="Proporcion"
+                class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" required />
+                <span asp-validation-for="Proporcion" class="text-danger"></span>
             </div>
             <div class="col-lg-4">
-                <select name="proporcion" id="proporcion" aria-placeholder="Seleccionar"
+                <select name="unidad" id="unidad" aria-placeholder="Seleccionar" asp-for="Unidad"
                 class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
-                    <option value="">Proporcion</option>
-                    <option value="value2">Value 2</option>
-                    <option value="value3">Value 3</option>
+                    <option disabled selected>Unidad</option>
+                    <option value="Oz">Oz</option>
+                    <option value="Gr">Gr</option>
+                    <option value="Ml">Ml</option>
                 </select>
-            </div>
-        </div>
-        <div class="row my-5 justify-content-center">
-            <div class="form-group">
-                <input asp-for="Rest" class="form-control" value="" />
+                <span asp-validation-for="Unidad" class="text-danger"></span>
             </div>
         </div>
         <div class="row my-5 justify-content-center">
             <a asp-action="Show" class="btn-sam btngray-sam w-25 m-2 text-center">Cancelar</a>
-            <input type="submit" value="Registrar" class="btnsuccess-sam w-25 m-2" />
+            <input type="submit" value="Registrar" class="btnsuccess-sam w-25 m-2" required />
         </div>
     </div>
 </form>
@@ -105,6 +109,11 @@
                 selectS.options.add(new Option(subCats[e].nombre, subCats[e].id));
             }
         }
+        document.getElementById("categoria_input").value = selectP.value;
+    }
+
+    function changeSubcatInt() {
+        document.getElementById("subcategoria_input").value = document.getElementById("subcategoria").value;
     }
 </script>
 

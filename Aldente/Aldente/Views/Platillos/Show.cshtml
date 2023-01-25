@@ -29,14 +29,14 @@
     </div>
 </div>
 
-<form>
+<form asp-action="Show">
     <div class="container bg-veige p-4 rounded ftfoodsecret-regular ftsize-22 fw-bold">
         <div class="row my-1">
             <div class="col-md-2 ftcolor-orange">
                 Buscar elemento
             </div>
             <div class="col-md-10">
-                <input type="text" placeholder="Nombre del elemento..." class="w-100 textbox-sam px-3 py-1"
+                <input name="busqueda" id="busqueda" type="text" placeholder="Nombre del elemento..." class="w-100 textbox-sam px-3 py-1"
                         required />
             </div>
         </div>
@@ -94,10 +94,10 @@
                 <div class="col-md-8 ftsize-22">
                     <div class="row">
                         <div class="col-sm-3">
-                            <span class="ftfoodsecret-regular fw-bold">Tamaño: </span><span class="ftfoodlist-regular">{Tamaño}</span>
+                            <span class="ftfoodsecret-regular fw-bold">Tamaño: </span><span class="ftfoodlist-regular">@Html.DisplayFor(modelItem => item.Tamanio)</span>
                         </div>
                         <div class="col-sm-5">
-                            <span class="ftfoodsecret-regular fw-bold">Proporcion: </span><span  class="ftfoodlist-regular">{Proporcion}</span><span  class="ftfoodlist-regular">{Unidad}</span>
+                            <span class="ftfoodsecret-regular fw-bold">Proporcion: </span><span  class="ftfoodlist-regular">@Html.DisplayFor(modelItem => item.Proporcion)</span><span  class="ftfoodlist-regular">@Html.DisplayFor(modelItem => item.Unidad)</span>
                         </div>
                         <div class="col-sm-4">
                             <span class="ftfoodsecret-regular fw-bold ftcolor-green">Precio: </span><span class="ftfoodlist-regular">$ @Html.DisplayFor(modelItem => item.Precio)</span>
@@ -105,11 +105,11 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <span class="ftfoodsecret-regular fw-bold">Categoria: </span><span class="ftfoodlist-regular">{Categoria}</span>
+                            <span class="ftfoodsecret-regular fw-bold">Categoria: </span><span class="ftfoodlist-regular">@Html.DisplayFor(modelItem => item.Categoria.Nombre)</span>
                         </div>
                         <div class="col-sm-4">
                             <span class="ftfoodsecret-regular fw-bold">Subcategoria: </span><span
-                            class="ftfoodlist-regular">{Tamaño}</span>
+                            class="ftfoodlist-regular">@Html.DisplayFor(modelItem => item.SubCategoia.Nombre)</span>
                         </div>
                     </div>
                     <div class="row mt-1">
