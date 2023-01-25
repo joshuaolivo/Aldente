@@ -35,20 +35,15 @@
             </div>
             <div class="col-lg-6">
                 <select name="categoria" id="categoria" aria-placeholder="Seleccionar"
-                        class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
-                    <option hidden>Categoria</option>
-                    @foreach (var cat in ViewBag.Categorias)
-                    {
-                        <option value="@cat.Id">@cat.Nombre</option>
-                    }
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam" onchange="changeElems();">
+                    <option disabled selected>Categoria</option>
+                    <option value="Alimentos">Alimentos</option>
+                    <option value="Bebidas">Bebidas</option>
+                    <option value="Postres">Postres</option>
                 </select>
                 <select name="subcategoria" id="subcategoria" aria-placeholder="Seleccionar"
-                        class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
-                    <option hidden>Subcategoria</option>
-                    @foreach (var sbcat in ViewBag.SubCategorias)
-                    {
-                        <option value="@sbcat.Id">@sbcat.Nombre</option>
-                    }
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                    <option disabled selected>Subcategoria</option>
                 </select>
                 <input asp-for="Precio" class="textbox-green-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Precio" />
                 <span asp-validation-for="Precio" class="text-danger"></span>
@@ -61,8 +56,7 @@
         <div class="row my-4">
             <div class="col-lg-4">
                 <select name="tamanio" id="tamanio" aria-placeholder="Seleccionar"
-                        class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
-                    
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
                     <option value="">Tamaño</option>
                     <option value="value2">Value 2</option>
                     <option value="value3">Value 3</option>
@@ -81,30 +75,17 @@
                 </select>
             </div>
         </div>
-      
         <div class="row my-5 justify-content-center">
             <div class="form-group">
-                <input asp-for="Rest" class="form-control" value="" />
+                <input asp-for="Restaurante" class="form-control" value="" />
             </div>
         </div>
         <div class="row my-5 justify-content-center">
-            <a asp-action="Index" class="btn-sam btngray-sam w-25 m-2 text-center">Cancelar</a>
+            <a asp-action="Show" class="btn-sam btngray-sam w-25 m-2 text-center">Cancelar</a>
             <input type="submit" value="Registrar" class="btnsuccess-sam w-25 m-2" />
         </div>
     </div>
 </form>
-
-<script>
-    const previewImage = (event) => {
-    const imageFiles = event.target.files;
-    const imageFilesLength = imageFiles.length;
-    if (imageFilesLength > 0) {
-        const imageSrc = URL.createObjectURL(imageFiles[0]);
-        const imagePreviewElement = document.getElementById("ImgSelected");
-        imagePreviewElement.src = imageSrc;
-    }
-};
-</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
