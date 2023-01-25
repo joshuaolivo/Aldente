@@ -14,7 +14,6 @@ namespace Aldente.Data.Entities
         public int Id { get; set; }
         public string Nombre { get; set; }
         [EmailAddress]
-        [Required]
         public string Correo { get; set; }
         [MaxLength(13)]
         [Required]
@@ -23,6 +22,7 @@ namespace Aldente.Data.Entities
         public string Direccion { get; set; }
         [Required]
         public byte[] Logo { get; set; }
-
+        [Required]
+        public string user { get; set; }
     }
 }

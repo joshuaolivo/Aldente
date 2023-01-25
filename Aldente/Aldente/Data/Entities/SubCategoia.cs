@@ -11,7 +11,7 @@ namespace Aldente.Data.Entities
     {
         [Key]
         public int Id { get; set; }
-        public virtual ICollection<Categoria> Id_Categoria { get; set; }
+        public Categoria Categorias_Id { get; set; }
         public string Nombre { get; set; }
     }
 }

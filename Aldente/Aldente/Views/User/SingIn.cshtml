@@ -4,33 +4,32 @@
     ViewData["Title"] = "Registro";
 }
 
-<h1>Registro</h1>
-
-<h4>SingInModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Registro">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+<div class="w-100 text-center my-5">
+    <h1 class="ftfoodsecret-regular fw-bold ftsize-85">REGISTRO EN EL SISTEMA</h1>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="w-100 text-center my-1">
+    <hr />
+    <h3 class="ftfoodsecret-regular fw-bold ftsize-85">Tus credenciales</h3>
+    <hr />
+</div>
+
+<div class="my-3 mb-5 mx-auto col-lg-5 rounded shadow-lg p-5">
+    <form asp-action="Registro">
+        <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
+        <div>
+            <input asp-for="Email" class="textbox-sam ftfoodsecret-regular p-3 ftsize-22 my-4" placeholder="Correo" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div>
+            <input asp-for="Password"class="textbox-sam ftfoodsecret-regular p-3 ftsize-22 my-4" placeholder="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div>
+            <input type="submit" value="Registrarme" class="btnlogin-sam my-4 w-100" />
+            <a asp-controller="Home" asp-action="Index" class="btngray-sam my-4 w-100" >Cancelar</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

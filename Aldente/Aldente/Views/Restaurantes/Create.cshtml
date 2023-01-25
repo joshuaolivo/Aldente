@@ -1,49 +1,51 @@
 ﻿@model Aldente.DTOs.RestauranteDTO
 
 @{
-    ViewData["Title"] = "Crear Restaurante";
+    ViewData["Title"] = "Información de mi restaurante";
 }
 
-<h1>Nuevo restaurante</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="w-100 text-center my-5">
+    <h1 class="ftfoodsecret-regular fw-bold ftsize-85">INFORMACION DE TU RESTAURANTE</h1>
+</div>
+
+<div class="my-3 mb-5 mx-auto col-lg-5 rounded shadow-lg p-5">
+    <div class="">
         <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger" ></div>
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
-                <input asp-for="Correo" class="form-control" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
+            <div asp-validation-summary="ModelOnly" class="alert alert-warning" ></div>
+            <div>
+                <input asp-for="Nombre" class="textbox-sam ftfoodsecret-regular p-3 ftsize-22 my-4" placeholder="Nombre" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Imagen"></label>
-                <input asp-for="Imagen" placeholder="Imagen" type="file" />
-                <span asp-validation-for="Imagen" class="text-danger"></span>
+            <div>
+                <input asp-for="Correo" class="textbox-sam ftfoodsecret-regular p-3 ftsize-22 my-4" placeholder="Correo" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div>
+                <input asp-for="Telefono" class="textbox-sam ftfoodsecret-regular p-3 ftsize-22 my-4" placeholder="Telefono" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div>
+                <input asp-for="Direccion" class="textbox-sam ftfoodsecret-regular p-3 ftsize-22 my-4" placeholder="Direccion" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="shadow rounded-4 p-1 mb-2 mx-auto w-75 text-center">
+                <p class="ftfoodsecret-regular ftsize-35 mt-2 mb-1">Logo</p>
+                <img id="ImgSelected" src="/assets/images/burger-2013191_1280.png" class="img-fluid rounded-4" />
+            </div>
+            <div class="w-100 text-center my-4">
+                <label for="ImgSelector">
+                    <div class="my-2 btnorange-sam p-2 px-4 mx-auto ftfoodlist-regular" style="cursor: pointer;">
+                        Seleccionar archivo
+                        <input id="ImgSelector" asp-for="Img" style="display: none;" onchange="previewImage(event);" type="file"/>
+                    </div>
+                </label>
+                <span asp-validation-for="Img" class="text-danger"></span>
+            </div>
+            <div>
+                <input type="submit" value="Registrar restaurante" class="btnlogin-sam my-4 w-100" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
