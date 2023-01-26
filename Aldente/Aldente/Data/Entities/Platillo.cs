@@ -13,7 +13,6 @@ namespace Aldente.Data.Entities
         public int Id { get; set; }
         [Required]
         public string Nombre { get; set; }
-        [Required]
         public byte[] Imagen { get; set; }
         [Required]
         public string Descripcion { get; set; }
