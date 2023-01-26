@@ -36,6 +36,10 @@ namespace Aldente.Controllers
         public async Task<IActionResult> CreateAsync(RestauranteDTO restaurnateDTO) {
             if (User.Identity.IsAuthenticated)
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(restaurnateDTO);
+                }
                 var restaurante = mapper.Map<Restaurante>(restaurnateDTO);
                 using (var ms = new MemoryStream())
                 {
