@@ -34,11 +34,6 @@ namespace Aldente.Controllers
             }
         }
 
-        //public async Task<IActionResult> Create(PlatilloDTO platilloDTO)
-        //{
-        //    return View();
-        //}
-
         [HttpPost]
         public async Task<IActionResult> CreateAsync(PlatilloDTO platilloDTO)
         {
@@ -52,7 +47,7 @@ namespace Aldente.Controllers
                 }
                 platillo.Categoria = dbContext.Categorias.Where(e => e.Id == platilloDTO.CategoriaInt).First();
                 platillo.SubCategoia = dbContext.subCategoias.Where(e => e.Id == platilloDTO.SubCategoiaInt).First();
-                platillo.Restaurante = dbContext.Restaurantes.Where(e => e.user == User.Identity.Name).First();
+                platillo.Restaurante = dbContext.Restaurantes.Where(e => e.user == User.Claims.Where(x => x.Type.Equals("TenantId")).Select(x => x.Value).FirstOrDefault()).First();
                 dbContext.Add(platillo);
                 await dbContext.SaveChangesAsync();
                 return RedirectToAction("Show", "Platillos");
@@ -66,7 +61,8 @@ namespace Aldente.Controllers
         {
             try
             {
-                var restaurante = dbContext.Restaurantes.Where(e => e.user == User.Identity.Name).First();
+                var idUser = User.Claims.Where(x => x.Type.Equals("TenantId")).Select(x => x.Value).FirstOrDefault();
+                var restaurante = dbContext.Restaurantes.Where(e => e.user == idUser).First();
                 ViewBag.RestauranteNombre = restaurante.Nombre;
                 ViewBag.RestauranteLogo = restaurante.Logo;
                 ViewBag.Categorias = dbContext.Categorias.ToList();
@@ -75,8 +71,8 @@ namespace Aldente.Controllers
                 var platos = (from p in dbContext.Platillos
                               join r in dbContext.Restaurantes
                               on p.Restaurante equals r
-                              //where r.user == 
-                              select new Platillo { Nombre = p.Nombre, Id = p.Id, Categoria = new Categoria { Id = p.Categoria.Id, Nombre = p.Categoria.Nombre } , Descripcion = p.Descripcion, Imagen = p.Imagen, Precio = p.Precio, Restaurante = new Restaurante { Id = p.Restaurante.Id }, SubCategoia = new SubCategoia { Id = p.SubCategoia.Id, Nombre = p.SubCategoia.Nombre }, Proporcion = p.Proporcion, Tamanio = p .Tamanio, Unidad = p.Unidad }).ToList();
+                              where r.user == idUser
+                              select new Platillo { Nombre = p.Nombre, Id = p.Id, Categoria = new Categoria { Id = p.Categoria.Id, Nombre = p.Categoria.Nombre }, Descripcion = p.Descripcion, Imagen = p.Imagen, Precio = p.Precio, Restaurante = new Restaurante { Id = p.Restaurante.Id }, SubCategoia = new SubCategoia { Id = p.SubCategoia.Id, Nombre = p.SubCategoia.Nombre }, Proporcion = p.Proporcion, Tamanio = p.Tamanio, Unidad = p.Unidad }).ToList();
 
                 return View(platos);
             }
@@ -85,12 +81,25 @@ namespace Aldente.Controllers
                 return RedirectToAction("Create", "Restaurantes");
             }
         }
-
-        public async Task<IActionResult> Delete(int id )
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
             var platillo = dbContext.Platillos.Where(p => p.Id == id).First();
             dbContext.Remove(platillo);
             await dbContext.SaveChangesAsync();
+            return RedirectToAction("Show");
+        }
+
+        public IActionResult Actualizar(int id)
+        {
+            var platillo = dbContext.Platillos.Where(x => x.Id == id).FirstOrDefault();
+            return View(platillo);
+        }
+        [HttpPost]
+        public IActionResult Actualizar(Platillo platillo)
+        {
+            dbContext.Entry(platillo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            dbContext.SaveChanges();
             return RedirectToAction("Show");
         }
     }
