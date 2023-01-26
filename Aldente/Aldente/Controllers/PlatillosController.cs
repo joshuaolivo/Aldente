@@ -3,6 +3,7 @@ using Aldente.Data.Entities;
 using Aldente.DTOs;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -41,6 +42,15 @@ namespace Aldente.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Categorias = dbContext.Categorias.ToList();
+                    ViewBag.SubCategorias = dbContext.subCategoias.ToList();
+                    return View(platilloDTO);
+                }
+                if (platilloDTO.Img == null)
+                {
+                    ViewBag.Categorias = dbContext.Categorias.ToList();
+                    ViewBag.SubCategorias = dbContext.subCategoias.ToList();
+                    ModelState.AddModelError("Img", "No se ha seleccionado ninguna imagen");
                     return View(platilloDTO);
                 }
                 var platillo = mapper.Map<Platillo>(platilloDTO);
@@ -94,7 +104,7 @@ namespace Aldente.Controllers
             }
                
         }
-        [HttpPost]
+
         public async Task<IActionResult> Delete(int id)
         {
             if (User.Identity.IsAuthenticated)
@@ -137,6 +147,13 @@ namespace Aldente.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Categorias = dbContext.Categorias.ToList();
+                    ViewBag.SubCategorias = dbContext.subCategoias.ToList();
+                    ViewBag.platillo = (from p in dbContext.Platillos
+                                        join r in dbContext.Restaurantes
+                                        on p.Restaurante equals r
+                                        where p.Id == platilloDTO.Id
+                                        select new Platillo { Nombre = p.Nombre, Id = p.Id, Categoria = new Categoria { Id = p.Categoria.Id, Nombre = p.Categoria.Nombre }, Descripcion = p.Descripcion, Imagen = p.Imagen, Precio = p.Precio, Restaurante = new Restaurante { Id = p.Restaurante.Id }, SubCategoia = new SubCategoia { Id = p.SubCategoia.Id, Nombre = p.SubCategoia.Nombre }, Proporcion = p.Proporcion, Tamanio = p.Tamanio, Unidad = p.Unidad }).FirstOrDefault();
                     return View(platilloDTO);
                 }
                 var platillo = mapper.Map<Platillo>(platilloDTO);

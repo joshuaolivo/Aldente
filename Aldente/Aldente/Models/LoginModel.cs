@@ -8,11 +8,11 @@ namespace Aldente.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [EmailAddress(ErrorMessage = "El campo debe ser un correo electrónico válido")]
+        [Required(ErrorMessage = "El correo es requerido")]
+        [EmailAddress(ErrorMessage = "El correo no tiene un formato válido")]
         public string Email { get; set; } = null!;
 
-        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [Required(ErrorMessage = "La contraseña es requerida")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
 

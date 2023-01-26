@@ -9,7 +9,6 @@ namespace Aldente.DTOs
     {
         [Required]
         public string Nombre { get; set; }
-        [Required]
         public IFormFile Img { get; set; }
         [Required]
         public string Descripcion { get; set; }
