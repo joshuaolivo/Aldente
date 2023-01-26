@@ -42,7 +42,7 @@ namespace Aldente.Controllers
                     restaurnateDTO.Img.CopyTo(ms);
                     restaurante.Logo = ms.ToArray();
                 }
-                restaurante.user = User.Identity.Name;
+                restaurante.user = User.Claims.Where(x => x.Type.Equals("TenantId")).Select(x => x.Value).FirstOrDefault();
                 dbContext.Add(restaurante);
                 await dbContext.SaveChangesAsync();
                 return RedirectToAction("Show", "Platillos");
