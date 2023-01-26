@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div id="platillos">
+<div id="platillos" class="my-3 d-flex flex-wrap justify-content-between">
     @foreach (var item in Model)
    {
        <div class="bg-primarylightsam p-1 mb-2 rounded-4 ftfoodlist-regular ftcolor-white text-center"
@@ -24,7 +24,7 @@
            <div class="ftsize-22 fw-bold">@item.Nombre</div>
            <div class="ftsize-22 fw-bold">@item.Proporcion @item.Unidad.</div>
            <div class="ftsize-35 fw-bold">$@item.Precio MXN.</div>
-           <div class="ftsize-22" align="justify">
+           <div class="ftsize-22 p-1" align="justify">
                @item.Descripcion
            </div>
            <div class="ftsize-22 fw-bold">Tamaño: @item.Tamanio</div>

@@ -29,56 +29,7 @@
     </div>
 </div>
 
-<form asp-action="Show">
-    <div class="container bg-veige p-4 rounded ftfoodsecret-regular ftsize-22 fw-bold">
-        <div class="row my-1">
-            <div class="col-md-2 ftcolor-orange">
-                Buscar elemento
-            </div>
-            <div class="col-md-10">
-                <input name="busqueda" id="busqueda" type="text" placeholder="Nombre del elemento..." class="w-100 textbox-sam px-3 py-1"
-                        required />
-            </div>
-        </div>
-        <hr style="background-color: #F4B700; border: none; height: 3px;" />
-        <div class="row my-1">
-            <div class="row">
-                <div class="col ftcolor-orange">
-                    Filtrar busqueda por:
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 ftcolor-orange">
-                    Categoria:
-                </div>
-                <div class="col-md-4">
-                    <select name="categoria" id="categoria" aria-placeholder="Seleccionar"
-                    class="w-100 textbox-sam px-3 py-1 dropdown-sam" onchange="changeSubCatsElems();">
-                        <option disabled selected>Categoria</option>
-                        @foreach (var cat in ViewBag.Categorias)
-                        {
-                            <option value="@cat.Id">@cat.Nombre</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-md-2 ftcolor-orange">
-                    Subcategoria
-                </div>
-                <div class="col-md-4">
-                    <select name="subcategoria" id="subcategoria" aria-placeholder="Seleccionar"
-                    class="w-100 textbox-sam px-3 py-1 dropdown-sam">
-                        <option disabled selected>Subcategoria</option>
-                    </select>
-                </div>
-                
-            </div>
-            <div class="row w-100 justify-content-center pt-1">
-                <input type="submit" class="btn btn-dark w-50 ftsize-22" value="Buscar" />
-            </div>
-        </div>
-    </div>
-</form>
-
+<partial name="Search" >
 
 <div name="platillos" class="my-3">
     @foreach (var item in Model) {
