@@ -60,9 +60,9 @@ namespace Aldente.Controllers
         }
         public IActionResult Show()
         {
-            try
+            var idUser = User.Claims.Where(x => x.Type.Equals("TenantId")).Select(x => x.Value).FirstOrDefault();
+            if (dbContext.Restaurantes.Any(e => e.user == idUser))
             {
-                var idUser = User.Claims.Where(x => x.Type.Equals("TenantId")).Select(x => x.Value).FirstOrDefault();
                 var restaurante = dbContext.Restaurantes.Where(e => e.user == idUser).First();
                 ViewBag.RestauranteNombre = restaurante.Nombre;
                 ViewBag.RestauranteLogo = restaurante.Logo;
@@ -77,7 +77,7 @@ namespace Aldente.Controllers
 
                 return View(platos);
             }
-            catch (Exception ex)
+            else
             {
                 return RedirectToAction("Create", "Restaurantes");
             }
@@ -93,7 +93,8 @@ namespace Aldente.Controllers
 
         public IActionResult Actualizar(int id)
         {
-
+            ViewBag.Categorias = dbContext.Categorias.ToList();
+            ViewBag.SubCategorias = dbContext.subCategoias.ToList();
             ViewBag.platillo = (from p in dbContext.Platillos
                                 join r in dbContext.Restaurantes
                                 on p.Restaurante equals r
@@ -105,16 +106,20 @@ namespace Aldente.Controllers
         public IActionResult Actualizar(PlatilloDTO platilloDTO)
         {
             var platillo = mapper.Map<Platillo>(platilloDTO);
-            using (var ms = new MemoryStream())
+            if (platilloDTO.Img != null)
             {
-                platilloDTO.Img.CopyTo(ms);
-                platillo.Imagen = ms.ToArray();
+                using (var ms = new MemoryStream())
+                {
+                    platilloDTO.Img.CopyTo(ms);
+                    platillo.Imagen = ms.ToArray();
+                }
             }
             platillo.Categoria = dbContext.Categorias.Where(e => e.Id == platilloDTO.CategoriaInt).First();
             platillo.SubCategoia = dbContext.subCategoias.Where(e => e.Id == platilloDTO.SubCategoiaInt).First();
             var id = User.Claims.Where(x => x.Type.Equals("TenantId")).Select(x => x.Value).FirstOrDefault();
             platillo.Restaurante = dbContext.Restaurantes.Where(e => e.user == id).FirstOrDefault();
             dbContext.Entry(platillo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            if (platilloDTO.Img == null) dbContext.Entry(platillo).Property(x=> x.Imagen).IsModified = false;
             dbContext.SaveChanges();
             return RedirectToAction("Show");
         }

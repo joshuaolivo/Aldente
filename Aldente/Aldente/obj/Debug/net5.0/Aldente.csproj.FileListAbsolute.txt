@@ -247,3 +247,4 @@ F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\bin\Debug\net5.0\zh-Hans\Micr
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\bin\Debug\net5.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\bin\Debug\net5.0\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
+F:\elagu\Documentos\GitHub\Aldente\Aldente\Aldente\obj\Debug\net5.0\Razor\Views\Platillos\Actualizar.cshtml.g.cs

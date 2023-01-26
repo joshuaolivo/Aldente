@@ -20,7 +20,8 @@
 <div name="restaurantes" class="my-3 d-flex flex-wrap justify-content-between">
     @foreach (var item in Model) {
     <a class="card rounded-4 mb-2 card-shadow card-text" style="width: 18rem;" role="button" asp-action="Menu" asp-route-id="@item.Id">
-        <img src="@(item.Logo != null ? "data:;base64,"+Convert.ToBase64String(item.Logo) : "/assets/images/burger-2013191_1280.png")" class="card-img-top rounded-top-4">
+        <img src="@(item.Logo != null ? "data:;base64,"+Convert.ToBase64String(item.Logo) : "/assets/images/burger-2013191_1280.png")"
+        class="card-img-top rounded-top-4" height="290px">
         <div class="card-body bg-secondarysam rounded-bottom-4">
             <h3 class="card-title ftfoodlist-regular ftsize-35 fw-bold text-center">@item.Nombre</h3>
         </div>

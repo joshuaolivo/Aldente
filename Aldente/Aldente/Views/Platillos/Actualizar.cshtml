@@ -1,83 +1,141 @@
 ﻿@model Aldente.DTOs.PlatilloDTO
 
 @{
-    ViewData["Title"] = "Actualizar";
+    ViewData["Title"] = "Editar platillo";
 }
 
-<h1>Actualizar</h1>
+<p class="ftfoodsecret-regular ftsize-65 fw-bold mt-5 mb-3 text-center">Editar platillo</p>
 
-<h4>PlatilloDTO</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        @ViewBag.platillo.
-        <form asp-action="Actualizar" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" value="@ViewBag.platillo.Id" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="w-100 text-center my-4">
-                <label asp-for="Img" class="control-label"></label>
-                <input asp-for="Img" class="form-control" type="file"/>
-                <span asp-validation-for="Img" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" value="@ViewBag.platillo.Nombre" />
+<input asp-for="Id" style="display: none;" value="@ViewBag.platillo.Id" readonly disabled />
+
+<form asp-action="Actualizar" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
+    <div>
+        <div class="shadow rounded-4 p-1 mb-2 mx-auto w-25">
+            <img id="ImgSelected" src="@(ViewBag.platillo.Imagen != null ? "data:;base64,"+Convert.ToBase64String(ViewBag.platillo.Imagen) : "/assets/images/burger-2013191_1280.png")" class="img-fluid rounded-4" />
+        </div>
+        <div class="w-100 text-center my-4">
+            <label for="ImgSelector">
+                <div class="my-2 btnorange-sam p-2 px-4 mx-auto ftfoodlist-regular" style="cursor: pointer;">
+                    Seleccionar archivo
+                    <input id="ImgSelector" asp-for="Img" style="display: none;" onchange="previewImage(event);" type="file" required/>
+                </div>
+            </label>
+            <span asp-validation-for="Img" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="my-5">
+        <h2 class="ftfoodsecret-regular fw-bold">Generalidades</h2>
+        <div class="lineseparator"></div>
+        <div class="row my-4">
+            <div class="col-lg-6">
+                <input asp-for="Nombre" class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" value="@ViewBag.platillo.Nombre"
+                placeholder="Nombre del platillo" required />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" value="@ViewBag.platillo.Descripcion" />
+                @Html.TextArea("Descripcion", (string)(ViewBag.platillo.Descripcion), new { @class = "textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22",  id="descripcion", name = "txtComment", placeholder="Descripcion", rows="8"})
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" value="@ViewBag.platillo.Precio" />
+            <div class="col-lg-6">
+                <select name="categoria" id="categoria" aria-placeholder="Seleccionar"
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam" onchange="changeSubCatsElems();">
+                    <option disabled selected>Categoria</option>
+                    @foreach (var cat in ViewBag.Categorias)
+                    {
+                        if (cat.Id == ViewBag.platillo.Categoria.Id)
+                        {
+                            <option value="@cat.Id" selected>@cat.Nombre</option>
+                        }
+                        else
+                        {
+                            <option value="@cat.Id">@cat.Nombre</option>
+                        }
+                    }
+                </select>
+                <input asp-for="CategoriaInt" style="display: none;" id="categoria_input" value="@ViewBag.platillo.Categoria.Id" />
+                <span asp-validation-for="CategoriaInt" class="text-danger"></span>
+                <select name="subcategoria" id="subcategoria" aria-placeholder="Seleccionar"
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam" onchange="changeSubcatInt();">
+                    <option disabled selected>Subcategoria</option>
+                </select>
+                <input asp-for="SubCategoiaInt" style="display: none;" id="subcategoria_input" value="@ViewBag.platillo.SubCategoia.Id" />
+                <span asp-validation-for="SubCategoiaInt" class="text-danger"></span>
+                <input type="number" step=".01"  asp-for="Precio" value="@ViewBag.platillo.Precio"
+                class="textbox-green-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" placeholder="Precio" required />
                 <span asp-validation-for="Precio" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Rest" class="control-label"></label>
-                <input asp-for="Rest" class="form-control" value="@ViewBag.platillo.Restaurante.Id" />
-                <span asp-validation-for="Rest" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoriaInt" class="control-label"></label>
-                <input asp-for="CategoriaInt" class="form-control" value="@ViewBag.platillo.Categoria.Id" />
-                <span asp-validation-for="CategoriaInt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SubCategoiaInt" class="control-label"></label>
-                <input asp-for="SubCategoiaInt" class="form-control" value="@ViewBag.platillo.SubCategoia.Id" />
-                <span asp-validation-for="SubCategoiaInt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tamanio" class="control-label"></label>
-                <input asp-for="Tamanio" class="form-control" value="@ViewBag.platillo.Tamanio" />
+        </div>
+    </div>
+    <div class="my-5">
+        <h2 class="ftfoodsecret-regular fw-bold">Dimensiones</h2>
+        <div class="lineseparator"></div>
+        <div class="row my-4">
+            <div class="col-lg-4">
+                <select name="tamanio" id="tamanio" aria-placeholder="Seleccionar" asp-for="Tamanio"
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                    <option disabled selected>Tamaño</option>
+                    <option value="Grande">Grande</option>
+                    <option value="Mediano">Mediano</option>
+                    <option value="Chico">Chico</option>
+                </select>
                 <span asp-validation-for="Tamanio" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Proporcion" class="control-label"></label>
-                <input asp-for="Proporcion" class="form-control" value="@ViewBag.platillo.Proporcion" />
+            <div class="col-lg-4">
+                <input type="number" min="1" step="1" placeholder="Proporcion" value="@ViewBag.platillo.Proporcion" asp-for="Proporcion"
+                class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" required />
                 <span asp-validation-for="Proporcion" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Unidad" class="control-label"></label>
-                <input asp-for="Unidad" class="form-control" value="@ViewBag.platillo.Unidad" />
+            <div class="col-lg-4">
+                <select name="unidad" id="unidad" aria-placeholder="Seleccionar" asp-for="Unidad" 
+                class="w-100 textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22 dropdown-sam">
+                    <option disabled selected>Unidad</option>
+                    <option value="Oz">Oz</option>
+                    <option value="Gr">Gr</option>
+                    <option value="Ml">Ml</option>
+                </select>
                 <span asp-validation-for="Unidad" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+        <div class="row my-5 justify-content-center">
+            <a asp-action="Show" class="btn-sam btngray-sam w-25 m-2 text-center">Cancelar</a>
+            <input type="submit" value="Guardar" class="btnsuccess-sam w-25 m-2" />
+        </div>
     </div>
-</div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script>
+    const subCats = @Html.Raw(Json.Serialize(ViewBag.SubCategorias));
+    var selectP = document.getElementById("categoria");
+    var selectS = document.getElementById("subcategoria");
+
+    function changeSubCatsElems() {
+        selectS.removeAttribute("disabled");
+        $("#subcategoria").empty();
+        selectS.options.add(new Option("Subcategoria", "", false, true));
+        selectS.options[0].disabled = true;
+        for (var e in subCats) {
+            if (subCats[e].categorias_Id.id == selectP.value) {
+                selectS.options.add(new Option(subCats[e].nombre, subCats[e].id));
+            }
+        }
+        document.getElementById("categoria_input").value = selectP.value;
+    }
+
+    function changeSubcatInt() {
+        document.getElementById("subcategoria_input").value = document.getElementById("subcategoria").value;
+    }
+</script>
+
+<script>
+    for (var e in subCats) {
+        if (subCats[e].categorias_Id.id == selectP.value) {
+            selectS.options.add(new Option(subCats[e].nombre, subCats[e].id, false, (subCats[e].id==@ViewBag.platillo.SubCategoia.Id?true:false)));
+        }
+    }
+    let u_json = @Html.Raw(Json.Serialize(ViewBag.platillo.Unidad));
+    let t_json = @Html.Raw(Json.Serialize(ViewBag.platillo.Tamanio));
+    document.querySelector("#unidad").value = u_json;
+    document.querySelector("#tamanio").value = t_json;
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
