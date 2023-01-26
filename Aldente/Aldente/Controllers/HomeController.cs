@@ -1,4 +1,5 @@
 ﻿using Aldente.Data;
+using Aldente.Data.Entities;
 using Aldente.DTOs;
 using Aldente.Models;
 using AutoMapper;
@@ -43,7 +44,12 @@ namespace Aldente.Controllers
             }
             else
             {
-                var men = dbContext.Platillos.ToList();
+                var men = (from p in dbContext.Platillos
+                           join r in dbContext.Restaurantes
+                           on p.Restaurante equals r
+                           where r.Id == id
+                           select new Platillo { Nombre = p.Nombre, Id = p.Id, Categoria = new Categoria { Id = p.Categoria.Id, Nombre = p.Categoria.Nombre }, Descripcion = p.Descripcion, Imagen = p.Imagen, Precio = p.Precio, Restaurante = new Restaurante { Id = p.Restaurante.Id }, SubCategoia = new SubCategoia { Id = p.SubCategoia.Id, Nombre = p.SubCategoia.Nombre }, Proporcion = p.Proporcion, Tamanio = p.Tamanio, Unidad = p.Unidad }).ToList();
+
                 var res = await dbContext.Restaurantes.FindAsync(id);
                 ViewBag.Nombre = res.Nombre;
                 ViewBag.Logo = res.Logo;
