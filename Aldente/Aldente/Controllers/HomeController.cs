@@ -55,22 +55,20 @@ namespace Aldente.Controllers
                 {
                     ViewBag.Nombre = res.Nombre;
                     ViewBag.Logo = res.Logo;
-                    //ViewBag.Categorias = dbContext.Categorias.ToList();
-                    //ViewBag.SubCategorias = dbContext.subCategoias.ToList();
                     ViewBag.CategoriasContained = new List<Categoria>();
                     ViewBag.SubCategoriasContained = new List<SubCategoia>();
-                    foreach (var cat in dbContext.Categorias.ToList())
+                    foreach (Categoria cat in dbContext.Categorias.ToList())
                     {
-                        if (men.Any(e => e.Categoria == cat))
+                        if (men.Any(e => e.Categoria.Id == cat.Id))
                         {
                             ViewBag.CategoriasContained.Add(cat);
                         }
                     }
-                    foreach (var subcat in dbContext.subCategoias.ToList())
+                    foreach (SubCategoia subcat in dbContext.subCategoias.ToList())
                     {
-                        if (men.Any(e => e.SubCategoia == subcat))
+                        if (men.Any(e => e.SubCategoia.Id == subcat.Id))
                         {
-                            ViewBag.CategoriasContained.Add(subcat);
+                            ViewBag.SubCategoriasContained.Add(subcat);
                         }
                     }
                     return View(men);

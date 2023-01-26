@@ -4,9 +4,9 @@
 }
 
 
-<div class="row mt-5">
-    <div class="col-lg-6">
-        <a asp-action="Index" class="btn btn-light ftfoodsecret-regular">
+<div class="row mt-3">
+    <div class="col-lg-3">
+        <a asp-action="Index" class="btn btn-light ftfoodsecret-regular ftsize-22 w-100">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg>
@@ -14,7 +14,7 @@
         </a>
     </div>
 </div>
-<div class="row my-2">
+<div class="row my-2 mb-5">
     <div class="col-lg-3">
         <div class="shadow rounded-4">
             <img src="@(ViewBag.Logo != null ? "data:;base64,"+Convert.ToBase64String(ViewBag.Logo) :"/assets/images/burger-2013191_1280.png")" class="img-fluid" />
@@ -25,19 +25,36 @@
     </div>
 </div>
 
-<div id="platillos" class="my-3 mt-5 d-flex flex-wrap justify-content-between">
-    @foreach (var item in Model)
-   {
-       <div class="bg-primarylightsam p-1 mb-2 rounded-4 ftfoodlist-regular ftcolor-white text-center"
-       style="width: 18rem;" name="categoria_subcategoria_nombre">
-           <img src="@(item.Imagen != null ? "data:;base64,"+Convert.ToBase64String(item.Imagen) : "/assets/images/camera-1265913_1280.png")" class="img-fluid p-2 bg-white mb-3 rounded-4" />
-           <div class="ftsize-22 fw-bold">@item.Nombre</div>
-           <div class="ftsize-22 fw-bold">@item.Proporcion @item.Unidad.</div>
-           <div class="ftsize-35 fw-bold">$@item.Precio MXN.</div>
-           <div class="ftsize-22 p-1" align="justify">
-               @item.Descripcion
-           </div>
-           <div class="ftsize-22 fw-bold">Tamaño: @item.Tamanio</div>
-       </div>
-   }
-</div>
+@foreach(var cat in ViewBag.CategoriasContained)
+{
+    <h2 class="ftfoodsecret-regular fw-bold">Alimentos</h2>
+    <div class="lineseparator"></div>
+    <div class="mb-5 mt-1">
+        @foreach (var subcat in ViewBag.SubCategoriasContained)
+        {
+            <div class="my-3 d-flex flex-wrap justify-content-between">
+                @if (subcat.Categorias_Id == cat)
+                {
+                    <div class="row w-100 my-4 ftfoodsecret-regular ftsize-35 fw-bold">@subcat.Nombre</div>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Categoria.Id == cat.Id && item.SubCategoia.Id == subcat.Id)
+                        {
+                        <div class="bg-primarylightsam p-1 mb-2 rounded-4 ftfoodlist-regular ftcolor-white text-center"
+                        style="width: 18rem;" name="categoria_subcategoria_nombre">
+                            <img src="@(item.Imagen != null ? "data:;base64,"+Convert.ToBase64String(item.Imagen) : "/assets/images/camera-1265913_1280.png")" class="img-fluid p-2 bg-white mb-3 rounded-4" />
+                            <div class="ftsize-22 fw-bold">@item.Nombre</div>
+                            <div class="ftsize-22 fw-bold">@item.Proporcion @item.Unidad.</div>
+                            <div class="ftsize-35 fw-bold">$@item.Precio MXN.</div>
+                            <div class="ftsize-22 p-1" align="justify">
+                                @item.Descripcion
+                            </div>
+                            <div class="ftsize-22 fw-bold">Tamaño: @item.Tamanio</div>
+                        </div>
+                        }
+                    }
+                }
+            </div>
+        }
+    </div>
+}
