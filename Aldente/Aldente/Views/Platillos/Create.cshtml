@@ -5,10 +5,8 @@
 @{
     ViewData["Title"] = "Agregar platillo";
 }
-<p class="ftfoodsecret-regular ftsize-65 fw-bold mt-5 mb-3 text-center">Agregar platillo</p>
 
-<script>
-</script>
+<p class="ftfoodsecret-regular ftsize-65 fw-bold mt-5 mb-3 text-center">Agregar platillo</p>
 
 <form asp-action="Create" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
@@ -73,7 +71,7 @@
                 <span asp-validation-for="Tamanio" class="text-danger"></span>
             </div>
             <div class="col-lg-4">
-                <input type="number" min="1" step="1" placeholder="Unidades" asp-for="Proporcion"
+                <input type="number" min="1" step="1" placeholder="Propocion" asp-for="Proporcion"
                 class="textbox-sam p-3 m-1 fw-bold ftfoodsecret-regular ftsize-22" required />
                 <span asp-validation-for="Proporcion" class="text-danger"></span>
             </div>
