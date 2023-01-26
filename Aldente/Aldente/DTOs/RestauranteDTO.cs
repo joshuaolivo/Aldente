@@ -13,6 +13,7 @@ namespace Aldente.DTOs
         public string Correo { get; set; }
         [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
         [MaxLength(13)]
+        [Required]
         public string Telefono { get; set; }
         [Required]
         public string Direccion { get; set; }
