@@ -47,7 +47,8 @@ namespace Aldente.Controllers
                 }
                 platillo.Categoria = dbContext.Categorias.Where(e => e.Id == platilloDTO.CategoriaInt).First();
                 platillo.SubCategoia = dbContext.subCategoias.Where(e => e.Id == platilloDTO.SubCategoiaInt).First();
-                platillo.Restaurante = dbContext.Restaurantes.Where(e => e.user == User.Claims.Where(x => x.Type.Equals("TenantId")).Select(x => x.Value).FirstOrDefault()).First();
+                var id = User.Claims.Where(x => x.Type.Equals("TenantId")).Select(x => x.Value).FirstOrDefault();
+                platillo.Restaurante = dbContext.Restaurantes.Where(e => e.user == id).FirstOrDefault();
                 dbContext.Add(platillo);
                 await dbContext.SaveChangesAsync();
                 return RedirectToAction("Show", "Platillos");
@@ -92,11 +93,11 @@ namespace Aldente.Controllers
 
         public IActionResult Actualizar(int id)
         {
-            var platillo = dbContext.Platillos.Where(x => x.Id == id).FirstOrDefault();
-            return View(platillo);
+            ViewBag.platillo = dbContext.Platillos.Where(x => x.Id == id).FirstOrDefault();
+            return View();
         }
         [HttpPost]
-        public IActionResult Actualizar(Platillo platillo)
+        public IActionResult Actualizar(PlatilloDTO platillo)
         {
             dbContext.Entry(platillo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             dbContext.SaveChanges();
