@@ -51,9 +51,16 @@ namespace Aldente.Controllers
                            select new Platillo { Nombre = p.Nombre, Id = p.Id, Categoria = new Categoria { Id = p.Categoria.Id, Nombre = p.Categoria.Nombre }, Descripcion = p.Descripcion, Imagen = p.Imagen, Precio = p.Precio, Restaurante = new Restaurante { Id = p.Restaurante.Id }, SubCategoia = new SubCategoia { Id = p.SubCategoia.Id, Nombre = p.SubCategoia.Nombre }, Proporcion = p.Proporcion, Tamanio = p.Tamanio, Unidad = p.Unidad }).ToList();
 
                 var res = await dbContext.Restaurantes.FindAsync(id);
-                ViewBag.Nombre = res.Nombre;
-                ViewBag.Logo = res.Logo;
-                return View(men);
+                if (res != null)
+                {
+                    ViewBag.Nombre = res.Nombre;
+                    ViewBag.Logo = res.Logo;
+                    return View(men);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
         }
 

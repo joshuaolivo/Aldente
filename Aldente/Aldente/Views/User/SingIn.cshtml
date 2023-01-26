@@ -14,7 +14,7 @@
 </div>
 
 <div class="my-3 mb-5 mx-auto col-lg-5 rounded shadow-lg p-5">
-    <form asp-action="Registro">
+    <form asp-action="SingIn">
         <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
         <div>
             <input asp-for="Email" class="textbox-sam ftfoodsecret-regular p-3 ftsize-22 my-4" placeholder="Correo" />
@@ -26,7 +26,6 @@
         </div>
         <div>
             <input type="submit" value="Registrarme" class="btnlogin-sam my-4 w-100" />
-            <a asp-controller="Home" asp-action="Index" class="btngray-sam my-4 w-100" >Cancelar</a>
         </div>
     </form>
 </div>

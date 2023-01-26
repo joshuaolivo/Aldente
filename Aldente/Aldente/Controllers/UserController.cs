@@ -23,7 +23,7 @@ namespace Aldente.Controllers
         public IActionResult Login() => View();
         public IActionResult SingIn() => View();
         [HttpPost]
-        public async Task<IActionResult> Registro(SingInModel modelo)
+        public async Task<IActionResult> SingIn(SingInModel modelo)
         {
             if (!ModelState.IsValid)
             {

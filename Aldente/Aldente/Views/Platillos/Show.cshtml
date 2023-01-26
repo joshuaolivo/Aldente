@@ -6,7 +6,7 @@
 
 <p class="ftfoodsecret-regular ftsize-85 fw-bold mt-5 mb-3 text-center">@ViewBag.RestauranteNombre</p>
 
-<div class="shadow rounded-4 p-1 mb-2 mx-auto" style="width: 210px; height: 210px;">
+<div class="shadow rounded-4 p-1 mb-2 mx-auto d-flex align-items-center" style="width: 210px; height: 210px;">
     <img src="@(ViewBag.RestauranteLogo != null ? "data:;base64," + Convert.ToBase64String(ViewBag.RestauranteLogo): "/assets/images/burger-2013191_1280.png")" class="card-img-top rounded-4">
 </div>
 
@@ -29,6 +29,7 @@
     </div>
 </div>
 
+@*
 <form asp-action="Show">
     <div class="container bg-veige p-4 rounded ftfoodsecret-regular ftsize-22 fw-bold">
         <div class="row my-1">
@@ -77,7 +78,7 @@
             </div>
         </div>
     </div>
-</form>
+</form>*@
 
 <div name="platillos" class="my-3">
     @foreach (var item in Model) {

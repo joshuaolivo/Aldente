@@ -8,10 +8,10 @@ namespace Aldente.Models
 {
     public class SingInModel
     {
-        [Required]
-        [EmailAddress]
+        [Required (ErrorMessage = "El correo es requerido")]
+        [EmailAddress(ErrorMessage = "El correo no tiene un formato válido")]
         public string Email { get; set; } = null!;
-        [Required]
+        [Required (ErrorMessage = "La contraseña es requerida")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
     }
