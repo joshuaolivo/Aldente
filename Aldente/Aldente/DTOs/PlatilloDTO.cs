@@ -18,5 +18,6 @@ namespace Aldente.DTOs
         public string Tamanio { get; set; }
         public double Proporcion { get; set; }
         public string Unidad { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -10,58 +10,68 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        @ViewBag.platillo.Nombre
-        <form asp-action="Actualizar">
+        @ViewBag.platillo.
+        <form asp-action="Actualizar" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Nombre" class="control-label"></label>
-                    <input asp-for="Nombre" class="form-control" value="@ViewBag.platillo.Nombre"/>
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Descripcion" class="control-label"></label>
-                    <input asp-for="Descripcion" class="form-control" value="@ViewBag.platillo.Descripcion"/>
-                    <span asp-validation-for="Descripcion" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Precio" class="control-label"></label>
-                    <input asp-for="Precio" class="form-control" value="@ViewBag.platillo.Precio"/>
-                    <span asp-validation-for="Precio" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Rest" class="control-label"></label>
-                    <input asp-for="Rest" class="form-control" value="@ViewBag.platillo.Rest.Id"/>
-                    <span asp-validation-for="Rest" class="text-danger"></span>
-                </div>
-                @*<div class="form-group">
-                    <label asp-for="CategoriaInt" class="control-label"></label>
-                    <input asp-for="CategoriaInt" class="form-control" value="@ViewBag.platillo.Categoria"/>
-                    <span asp-validation-for="CategoriaInt" class="text-danger"></span>
-                </div>*@
-                @*<div class="form-group">
-                    <label asp-for="SubCategoiaInt" class="control-label"></label>
-                    <input asp-for="SubCategoiaInt" class="form-control" value="@ViewBag.platillo.SubCategoia" />
-                    <span asp-validation-for="SubCategoiaInt" class="text-danger"></span>
-                </div>*@
-                @*<div class="form-group">
-                    <label asp-for="Tamanio" class="control-label"></label>
-                    <input asp-for="Tamanio" class="form-control" value="@ViewBag.platillo.Tamanio"/>
-                    <span asp-validation-for="Tamanio" class="text-danger"></span>
-                </div>*@
-                @*<div class="form-group">
-                    <label asp-for="Proporcion" class="control-label"></label>
-                    <input asp-for="Proporcion" class="form-control" value="@ViewBag.platillo.Proporcion"/>
-                    <span asp-validation-for="Proporcion" class="text-danger"></span>
-                </div>*@
-                @*<div class="form-group">
-                    <label asp-for="Unidad" class="control-label"></label>
-                    <input asp-for="Unidad" class="form-control" value="@ViewBag.platillo.Unidad"/>
-                    <span asp-validation-for="Unidad" class="text-danger"></span>
-                </div>*@
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </form>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" value="@ViewBag.platillo.Id" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="w-100 text-center my-4">
+                <label asp-for="Img" class="control-label"></label>
+                <input asp-for="Img" class="form-control" type="file"/>
+                <span asp-validation-for="Img" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" value="@ViewBag.platillo.Nombre" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" value="@ViewBag.platillo.Descripcion" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" value="@ViewBag.platillo.Precio" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rest" class="control-label"></label>
+                <input asp-for="Rest" class="form-control" value="@ViewBag.platillo.Restaurante.Id" />
+                <span asp-validation-for="Rest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoriaInt" class="control-label"></label>
+                <input asp-for="CategoriaInt" class="form-control" value="@ViewBag.platillo.Categoria.Id" />
+                <span asp-validation-for="CategoriaInt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubCategoiaInt" class="control-label"></label>
+                <input asp-for="SubCategoiaInt" class="form-control" value="@ViewBag.platillo.SubCategoia.Id" />
+                <span asp-validation-for="SubCategoiaInt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tamanio" class="control-label"></label>
+                <input asp-for="Tamanio" class="form-control" value="@ViewBag.platillo.Tamanio" />
+                <span asp-validation-for="Tamanio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Proporcion" class="control-label"></label>
+                <input asp-for="Proporcion" class="form-control" value="@ViewBag.platillo.Proporcion" />
+                <span asp-validation-for="Proporcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Unidad" class="control-label"></label>
+                <input asp-for="Unidad" class="form-control" value="@ViewBag.platillo.Unidad" />
+                <span asp-validation-for="Unidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
 
