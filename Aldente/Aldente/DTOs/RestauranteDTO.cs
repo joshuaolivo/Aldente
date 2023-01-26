@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Aldente.DTOs
 {
-    public class RestauranteDTO : PlatillaRestauranteDTO
+    public class RestauranteDTO
     {
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        public IFormFile Img { get; set; }
         [Required]
         [EmailAddress]
         public string Correo { get; set; }
